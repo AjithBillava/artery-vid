@@ -6,7 +6,7 @@ import {ADD_TO_LIKED_LIBRARY,REMOVE_FROM_LIBRARY, SAVE_VIDEO, UNSAVE_VIDEO} from
 import {AddToPlaylist} from "./AddToPlaylist"
 
 export const checkItem = (array, id) => {
-    return !!array.find((item) => item.id === id);
+    return array.find((item) => item.id === id);
   };
 
 export const VideoDetails = () =>{

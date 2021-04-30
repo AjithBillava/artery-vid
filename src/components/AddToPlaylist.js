@@ -1,7 +1,15 @@
 import { useState } from "react"
 import { useData } from "../contexts/DataDispatch"
+import { checkItem } from "../components/VideoDetails";
 
-// import {}
+// export const checkItemInPlaylist = (playlist,playlistId, id) => {
+
+    
+//     return playlist
+//       .find((list) => list.id === playlistId)
+//       .videos.some((video) => video.id === id);
+//   };
+
 const CreateNewPlaylist = ({playlist}) =>{
     const {dataDispatch} = useData()
     const [playListName,setPlayListName] =useState("")
@@ -15,15 +23,24 @@ const CreateNewPlaylist = ({playlist}) =>{
         </div>
     )
 }
-
+// const obj1={
+//     id:"default",
+//     name:"default",
+//     videos:[],
+    
+// }
 export const AddToPlaylist = ( {show,setShow,currVideo} ) =>{
     const [showPlaylist,setShowPlaylist] = useState(false);
 
     const {library,dataDispatch} = useData()
     const playlist=library.playlist;
-
+    const checkItemInPlaylist = (playlistId, id) => {
+        return playlist
+          .find((list) => list.id === playlistId)
+          .videos.some((video) => video.id === id);
+      };
     // const playlistKeys=Object.keys(playlist)
-    console.log(show)
+    // console.log(show)
     return(
         
         <div className="playlist center">
@@ -36,10 +53,18 @@ export const AddToPlaylist = ( {show,setShow,currVideo} ) =>{
                <div className="border-bottom">
                {
                    playlist.map((item)=>(
-                       <div className="space-between align-center ">
-                           <input type="checkbox" checked={item.selectPlaylist} onChange={()=>dataDispatch({type:"ADD_TO_PLAYLIST",currVid:currVideo,id:item.id})} ></input>
+                    //    <div key={item.id}>
+                           <label key={item.id} htmlFor={item.id} className="space-between align-center " >
+                                <input type="checkbox" 
+                                onClick={()=>{!checkItemInPlaylist(item.id,currVideo.id)?
+                                    dataDispatch({type:"ADD_TO_PLAYLIST",currVid:currVideo,id:item.id}):
+                                    dataDispatch({type:"REMOVE_FROM_PLAYLIST",currVid:currVideo,id:item.id})}}
+                                id={item.id}
+                                checked={checkItemInPlaylist(item.id,currVideo.id)} 
+                            ></input>
                            {item.name}
-                       </div>
+                            </label>
+                       
                    ))
                }
                </div>

@@ -1,5 +1,5 @@
 import { v4 } from "uuid";
-import { checkItem } from "../components/Playlist";
+// import { checkItem } from "../components/VideoDetails";
 
 
 export const ADD_TO_HISTORY="ADD_TO_HISTORY"
@@ -43,17 +43,33 @@ export const DataReducer =( state, {type,video,id,playListName,currVid})=>{
             }
         case "ADD_PLAYLIST":
             return{
-                ...state,library:{...library,playlist:library.playlist.concat({id:v4(),name:playListName,videos:[],selectPlaylist:false})}
+                ...state,library:{...library,playlist:library.playlist.concat({id:v4(),name:playListName,videos:[]})}
             }
         case "ADD_TO_PLAYLIST":
-            console.log(currVid)
-            return{
-                ...state,library:{...library,
-                    playlist:library.playlist.map((item)=>
-                    (
-                        item.id===id && !checkItem(item.videos,currVid.id) ?{...item,videos:item.videos.concat(currVid),selectPlaylist:!item.selectPlaylist}:{...item,videos:item.videos.filter(vid=>vid.id===id),selectPlaylist:!item.selectPlaylist}
-                    )) }
-            }
+            // console.log(currVid)
+            return {...state,
+                library:{
+                    ...library,playlist:library.playlist.map(
+                        (item)=>{
+                            if(item.id===id){
+                                return{...item,videos:[...item.videos,currVid]}
+                            }
+                            return item
+                        }
+                        )
+                        }}
+        case "REMOVE_FROM_PLAYLIST":
+            return {...state,
+                library:{
+                    ...library,playlist:library.playlist.map(
+                        (item)=>{
+                            if(item.id===id){
+                                return {...item,videos:item.videos.filter(vid=>vid.id!==currVid.id)}
+                            }
+                            return item;
+                        })
+                
+                }}
         // case "CURRENT_VID":
         //     return{
         //         ...state,currVideo:video
@@ -63,3 +79,28 @@ export const DataReducer =( state, {type,video,id,playListName,currVid})=>{
             return state;
     }
 }
+
+// (
+//     {...item,videos:[...item.videos,currVid]}
+//     )
+// console.log(currVid)
+//             return {...state,library:{...library,playlist:library.playlist.map((item)=>({...item,videos:item.videos.concat(currVid)}))}}
+
+
+// return{
+//     ...state,library:{...library,
+//         playlist:library.playlist.map((item)=>
+//         (
+//             item.id===id && !checkItem(item.videos,currVid.id) ?
+//                 {...item,videos:item.videos.concat({...currVid,selectPlaylist:!currVid.selectPlaylist})}:
+//                 {...item,videos:[item.videos.filter(vid=>vid.id===id),{selectPlaylist:!currVid.selectPlaylist}]}
+//         )) }
+// }
+
+
+// return {...state,library:{...library,
+//     playlist:library.playlist.map((item)=>(
+//         {...item,videos:item.videos.filter(vid=>vid.id!==id).map(vid=>({...vid,selectPlaylist:!currVid.selectPlaylist}))}
+//         ))
+    
+//     }}

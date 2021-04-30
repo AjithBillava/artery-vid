@@ -19,7 +19,7 @@ export const PlayList = ()=> {
                 <hr/>
             <div >
             {
-               playlist.map(({id,name,videos,selectPlaylist})=>(
+               playlist.map(({id,name,videos})=>(
                 // <h2>{name}</h2>
                  
                 <div >

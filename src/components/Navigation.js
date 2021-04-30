@@ -9,10 +9,10 @@ export const Navigation = () =>{
                 <Link className="nav-links logo" to="/">Atery-Videos</Link>
             </div>
             <div>
-                <ul className="non-bullet nav-social-links inline-list align-center spa">
+                {/* <ul className="non-bullet nav-social-links inline-list align-center spa">
                     <li>notification</li>
                     <li>saved</li>
-                </ul>
+                </ul> */}
             </div>
         </nav>
         <div className="aside-nav"></div>

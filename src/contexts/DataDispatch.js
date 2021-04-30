@@ -12,7 +12,7 @@ export const dataList = {
                 id:"default",
                 name:"default",
                 videos:[],
-                selectPlaylist:false
+                
             }
         ]
     },
