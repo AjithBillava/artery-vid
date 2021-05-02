@@ -1,14 +1,14 @@
 import { useState } from "react"
 import { useData } from "../contexts/DataDispatch"
-// import { checkItem } from "../components/VideoDetails";
+import { checkItem } from "../components/VideoDetails";
 
-// export const checkItemInPlaylist = (playlist,playlistId, id) => {
+export const checkItemInPlaylist = (playlist,playlistId, id) => {
 
     
-//     return playlist
-//       .find((list) => list.id === playlistId)
-//       .videos.some((video) => video.id === id);
-//   };
+    return playlist
+      .find((list) => list.id === playlistId)
+      .videos.some((video) => video.id === id);
+  };
 
 const CreateNewPlaylist = ({playlist}) =>{
     const {dataDispatch} = useData()
@@ -29,16 +29,16 @@ const CreateNewPlaylist = ({playlist}) =>{
 //     videos:[],
     
 // }
-export const AddToPlaylist = ( {show,setShow,currVideo} ) =>{
+export const AddToPlaylist = ( {show,setShow} ) =>{
     const [showPlaylist,setShowPlaylist] = useState(false);
 
-    const {library,dataDispatch} = useData()
+    const {library,dataDispatch,currVideo} = useData()
     const playlist=library.playlist;
-    const checkItemInPlaylist = (playlistId, id) => {
-        return playlist
-          .find((list) => list.id === playlistId)
-          .videos.some((video) => video.id === id);
-      };
+    // const checkItemInPlaylist = (playlistId, id) => {
+    //     return playlist
+    //       .find((list) => list.id === playlistId)
+    //       .videos.some((video) => video.id === id);
+    //   };
     // const playlistKeys=Object.keys(playlist)
     // console.log(show)
     return(
@@ -56,11 +56,11 @@ export const AddToPlaylist = ( {show,setShow,currVideo} ) =>{
                     //    <div key={item.id}>
                            <label key={item.id} htmlFor={item.id} className="space-between align-center " >
                                 <input type="checkbox" 
-                                onClick={()=>{!checkItemInPlaylist(item.id,currVideo.id)?
-                                    dataDispatch({type:"ADD_TO_PLAYLIST",currVid:currVideo,id:item.id}):
-                                    dataDispatch({type:"REMOVE_FROM_PLAYLIST",currVid:currVideo,id:item.id})}}
+                                onClick={()=>{!checkItem(item.videos,currVideo.id)?
+                                    dataDispatch({type:"ADD_TO_PLAYLIST",currVid:{...currVideo,selectedPlaylist:true},id:item.id}):
+                                    dataDispatch({type:"REMOVE_FROM_PLAYLIST",currVid:{...currVideo,selectedPlaylist:false},id:item.id})}}
                                 id={item.id}
-                                checked={checkItemInPlaylist(item.id,currVideo.id)} 
+                                checked={checkItem(item.videos,currVideo.id)} 
                             ></input>
                            {item.name}
                             </label>

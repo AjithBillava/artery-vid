@@ -21,6 +21,8 @@ function App() {
         <Route path="/liked-videos" element={<LikedVideos/>} />
         <Route path="/saved-videos" element={<SavedVideos/>} />
         <Route path="/playlist-videos" element={<PlayList/>} />
+        <Route path="/playlist-videos/:videoID" element={<VideoDetails/>} />
+
       </Routes>
     </div>
    

@@ -1,5 +1,6 @@
 import { useData } from "../contexts/DataDispatch"
 import { Link } from "react-router-dom";
+import {ADD_TO_HISTORY} from "../reducers/DataReducer"
 
 export const checkItem = (arr,id)=>{
     return arr.find(item => item.id===id)
@@ -7,7 +8,7 @@ export const checkItem = (arr,id)=>{
 
 export const PlayList = ()=> {
 
-    const {library} =useData()
+    const {library,dataDispatch} =useData()
     const playlist=library.playlist;
     // const playlistVideos=library.playlist;
 
@@ -29,8 +30,9 @@ export const PlayList = ()=> {
                         <div className="wrap">
                         {
                         videos.map(({id,name,imageURL,videoURL,duration,details})=>(
-                        <Link to={`/${id}`} className="thumbnail " 
-                        key={id}
+                        <Link to={`/playlist-videos/${id}`} className="thumbnail " 
+                        onClick={()=>dataDispatch({type:ADD_TO_HISTORY,video:{id,name,imageURL,videoURL,duration,details}})}
+                    key={id}
                         >
                             <div className="badge-container vertical-card ">
                                 <img src={imageURL} style={{height:"150px",width:"250px"}} alt={name}/>

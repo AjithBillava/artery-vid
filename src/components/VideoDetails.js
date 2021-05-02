@@ -76,7 +76,7 @@ export const VideoDetails = () =>{
                
                 
             </div>
-             {show&&<AddToPlaylist show={show} setShow={setShow} currVideo={video} />}
+             {show&&<AddToPlaylist show={show} setShow={setShow}  />}
         </div>
     )
 }
