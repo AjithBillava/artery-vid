@@ -38,7 +38,7 @@ export const VideoDetails = () =>{
                     style={{
                         fill: `${checkItem(LikedVideos,video.id) ? "var(--primary-bg)" : "grey"}`
                       }}
-                    onClick={()=>{checkItem(LikedVideos,video.id)? dataDispatch({type:REMOVE_FROM_LIBRARY,video:video}): dataDispatch({type:ADD_TO_LIKED_LIBRARY,video:video})}}
+                    onClick={()=>{checkItem(LikedVideos,video.id)? dataDispatch({type:REMOVE_FROM_LIBRARY,id:video.id}): dataDispatch({type:ADD_TO_LIKED_LIBRARY,video:video})}}
                     >
                         <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" >
                             <g class="style-scope yt-icon">
