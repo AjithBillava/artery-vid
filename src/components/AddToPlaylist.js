@@ -23,24 +23,13 @@ const CreateNewPlaylist = ({playlist}) =>{
         </div>
     )
 }
-// const obj1={
-//     id:"default",
-//     name:"default",
-//     videos:[],
-    
-// }
+
 export const AddToPlaylist = ( {show,setShow} ) =>{
     const [showPlaylist,setShowPlaylist] = useState(false);
 
     const {library,dataDispatch,currVideo} = useData()
     const playlist=library.playlist;
-    // const checkItemInPlaylist = (playlistId, id) => {
-    //     return playlist
-    //       .find((list) => list.id === playlistId)
-    //       .videos.some((video) => video.id === id);
-    //   };
-    // const playlistKeys=Object.keys(playlist)
-    // console.log(show)
+    
     return(
         
         <div className="playlist center">

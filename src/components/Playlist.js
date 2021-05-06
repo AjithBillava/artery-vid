@@ -10,7 +10,6 @@ export const PlayList = ()=> {
 
     const {library,dataDispatch} =useData()
     const playlist=library.playlist;
-    // const playlistVideos=library.playlist;
 
     return(
         <div className="main-layout">
@@ -21,12 +20,10 @@ export const PlayList = ()=> {
             <div >
             {
                playlist.map(({id,name,videos})=>(
-                // <h2>{name}</h2>
                  
                 <div >
                  <h2>{name}</h2>
                     
-                    {/* if(checkItem(videos,id)){ */}
                         <div className="wrap">
                         {
                         videos.map(({id,name,imageURL,videoURL,duration,details})=>(
@@ -45,7 +42,6 @@ export const PlayList = ()=> {
                        ))
                        }
                     </div>
-                    {/* } */}
                 </div>
             ))
             }
