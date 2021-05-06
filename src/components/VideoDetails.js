@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { useData } from "../contexts/DataDispatch";
-// import { useParams } from "react-router"
-// import { VideoDB } from "../Video Lib data/videoData";
 import {ADD_TO_LIKED_LIBRARY,REMOVE_FROM_LIBRARY, SAVE_VIDEO, UNSAVE_VIDEO} from "../reducers/DataReducer"
 import {AddToPlaylist} from "./AddToPlaylist"
 
@@ -10,21 +8,18 @@ export const checkItem = (array, id) => {
   };
 
 export const VideoDetails = () =>{
-    // const {videoID} = useParams();
     const [show,setShow] = useState(false)
 
     const {dataDispatch,currVideo,library} =useData()
     const LikedVideos=library.liked;
     const SavedVideos=library.saved;
     const video=currVideo;
-    // console.log(video)
     return(
         <div className="main-layout "> 
             <div className="container center ">
                 <div className="section ">
                     <div >
                     <iframe width="100%" height="335" src={video.videoURL} 
-                    // onClick={()=>dataDispatch({type:"ADD_TO_HISTORY",video:video})}
                     title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
 
