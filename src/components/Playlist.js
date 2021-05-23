@@ -19,17 +19,17 @@ export const PlayList = ()=> {
                 <hr/>
             <div >
             {
-               playlist.map(({id,name,videos})=>(
+               playlist.map(({name,videos})=>(
                  
                 <div >
                  <h2>{name}</h2>
                     
                         <div className="wrap">
                         {
-                        videos.map(({id,name,imageURL,videoURL,duration,details})=>(
-                        <Link to={`/playlist-videos/${id}`} className="thumbnail " 
-                        onClick={()=>dataDispatch({type:ADD_TO_HISTORY,video:{id,name,imageURL,videoURL,duration,details}})}
-                    key={id}
+                        videos.map(({_id,name,imageURL,videoURL,duration,details})=>(
+                        <Link to={`/playlist-videos/${_id}`} className="thumbnail " 
+                        onClick={()=>dataDispatch({type:ADD_TO_HISTORY,video:{_id,name,imageURL,videoURL,duration,details}})}
+                    key={_id}
                         >
                             <div className="badge-container vertical-card ">
                                 <img src={imageURL} style={{height:"150px",width:"250px"}} alt={name}/>

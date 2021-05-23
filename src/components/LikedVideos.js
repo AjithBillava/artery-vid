@@ -12,9 +12,9 @@ export const LikedVideos = ()=>{
                 <hr/>
             <div className="wrap">
             {
-               likedVideos.map(({id,name,imageURL,videoURL,duration,details})=>(
-                <Link to={`/${id}`} className="thumbnail " 
-                key={id}
+               likedVideos.map(({_id,name,imageURL,videoURL,duration,details})=>(
+                <Link to={`/${_id}`} className="thumbnail " 
+                key={_id}
                 >
                     <div className="badge-container vertical-card ">
                         <img src={imageURL} style={{height:"150px",width:"250px"}} alt={name}/>
