@@ -10,16 +10,23 @@ export const checkItemInPlaylist = (playlist,playlistId, id) => {
       .videos.some((video) => video.id === id);
   };
 
-const CreateNewPlaylist = ({playlist}) =>{
+const CreateNewPlaylist = ({setShowPlaylist,showPlaylist}) =>{
     const {dataDispatch} = useData()
     const [playListName,setPlayListName] =useState("")
-
+    const [error,setError] = useState("")
     return(
-        <div className="vertical-card">
-            <label>Name</label>
-            <input onChange={(e)=>setPlayListName(e.target.value)} placeholder="Enter Playlist name"></input>
+        <div className="create-playlist ">
+            <label className="sm-txt">Name</label>
+            <input  onChange={(e)=>setPlayListName(e.target.value)} placeholder="Enter Playlist name"></input>
+            <label className="sm-txt error-color">{error}</label>
 
-            <button onClick={()=>dataDispatch({type:"ADD_PLAYLIST",playListName:`${playListName}`})} >create</button>
+            <div className="center">
+            <button className="btn sm-btn primary-btn" onClick={()=>{
+                playListName && dataDispatch({type:"ADD_PLAYLIST",playListName:`${playListName}`})
+                playListName && setShowPlaylist(!showPlaylist)
+                !playListName && setError("please enter playlist name")
+                }} >create</button>
+            </div>
         </div>
     )
 }
@@ -33,23 +40,24 @@ export const AddToPlaylist = ( {show,setShow} ) =>{
     return(
         
         <div className="playlist center">
-           <div className="modal-contents vertical-card md-width-card" >
-               <div className="space-between border-bottom">
-                   Add to..
-                   <button onClick={()=>setShow(!show)}>x</button>
+           <div className="modal-contents md-width-card add-to-playlist relative-box" >
+           <button className="dismiss-btn top-right" onClick={()=>setShow(!show)}>x</button>
+               <div className="space-between border-bottom relative-box">
+                   Add to...
+                  
                </div>
                
                <div className="border-bottom">
                {
                    playlist.map((item)=>(
                     //    <div key={item.id}>
-                           <label key={item.id} htmlFor={item.id} className="space-between align-center " >
+                           <label key={item._id} htmlFor={item._id} className="space-between align-center " >
                                 <input type="checkbox" 
-                                onClick={()=>{!checkItem(item.videos,currVideo.id)?
-                                    dataDispatch({type:"ADD_TO_PLAYLIST",currVid:{...currVideo,selectedPlaylist:true},id:item.id}):
-                                    dataDispatch({type:"REMOVE_FROM_PLAYLIST",currVid:{...currVideo,selectedPlaylist:false},id:item.id})}}
-                                id={item.id}
-                                checked={checkItem(item.videos,currVideo.id)} 
+                                onClick={()=>{!checkItem(item.videos,currVideo._id)?
+                                    dataDispatch({type:"ADD_TO_PLAYLIST",currVid:{...currVideo,selectedPlaylist:true},_id:item._id}):
+                                    dataDispatch({type:"REMOVE_FROM_PLAYLIST",currVid:{...currVideo,selectedPlaylist:false},_id:item._id})}}
+                                _id={item._id}
+                                checked={checkItem(item.videos,currVideo._id)} 
                             ></input>
                            {item.name}
                             </label>
@@ -61,7 +69,7 @@ export const AddToPlaylist = ( {show,setShow} ) =>{
                    <div>+</div>
                    <div>Create new playlist</div>
                </div>}
-               {showPlaylist && <CreateNewPlaylist playlist={playlist}/>}
+               {showPlaylist && <CreateNewPlaylist showPlaylist={showPlaylist} setShowPlaylist={setShowPlaylist} />}
 
            </div>
         </div>

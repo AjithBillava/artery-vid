@@ -26,7 +26,7 @@ export const DataReducer =( state, {type,video,_id,playListName,currVid})=>{
             }
         case REMOVE_FROM_LIBRARY:
             return{
-                ...state,library:{...library ,liked:library.liked.filter((item)=>item.id!==_id)}
+                ...state,library:{...library ,liked:library.liked.filter((item)=>item._id!==_id)}
             }
         case SAVE_VIDEO:
             return{
@@ -34,11 +34,11 @@ export const DataReducer =( state, {type,video,_id,playListName,currVid})=>{
             }
         case UNSAVE_VIDEO:
             return{
-                ...state,library:{...library ,saved:library.saved.filter((item)=>item.id!==_id)}
+                ...state,library:{...library ,saved:library.saved.filter((item)=>item._id!==_id)}
             }
         case "ADD_PLAYLIST":
             return{
-                ...state,library:{...library,playlist:library.playlist.concat({id:v4(),name:playListName,videos:[]})}
+                ...state,library:{...library,playlist:library.playlist.concat({_id:v4(),name:playListName,videos:[]})}
             }
         case "ADD_TO_PLAYLIST":
             // console.log(currVid)
@@ -58,8 +58,8 @@ export const DataReducer =( state, {type,video,_id,playListName,currVid})=>{
                 library:{
                     ...library,playlist:library.playlist.map(
                         (item)=>{
-                            if(item.id===_id){
-                                return {...item,videos:item.videos.filter(vid=>vid.id!==currVid.id)}
+                            if(item._id===_id){
+                                return {...item,videos:item.videos.filter(vid=>vid._id!==currVid._id)}
                             }
                             return item;
                         })
