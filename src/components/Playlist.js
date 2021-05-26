@@ -2,10 +2,6 @@ import { useData } from "../contexts/DataDispatch"
 import { Link } from "react-router-dom";
 import {ADD_TO_HISTORY} from "../reducers/DataReducer"
 
-export const checkItem = (arr,id)=>{
-    return arr.find(item => item.id===id)
-}
-
 export const PlayList = ()=> {
 
     const {library,dataDispatch} =useData()
@@ -19,15 +15,23 @@ export const PlayList = ()=> {
                 <hr/>
             <div >
             {
-               playlist.map(({name,videos})=>(
+               playlist.map(({name,videos,_id:playlistID})=>(
                  
-                <div >
-                 <h2>{name}</h2>
-                    
+                <div  >
+                    {videos.length!==0?
+                    <div className="md-txt space-between align-center">
+                        <p>{name}</p>
+                        <Link className="see-all-link" to={`/playlist-videos/${playlistID}`}> see all</Link>
+                    </div>
+                    :
+                    <div className="md-txt space-between align-center">
+                        <Link className="link" to={`/playlist-videos/${playlistID}`}>{name}</Link>
+                    </div>
+                    }
                         <div className="wrap">
                         {
                         videos.map(({_id,name,imageURL,videoURL,duration,details})=>(
-                        <Link to={`/playlist-videos/${_id}`} className="thumbnail " 
+                        <Link to={`/${_id}`} className="thumbnail " 
                         onClick={()=>dataDispatch({type:ADD_TO_HISTORY,video:{_id,name,imageURL,videoURL,duration,details}})}
                     key={_id}
                         >

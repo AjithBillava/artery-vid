@@ -104,3 +104,10 @@ a{
     outline: none;
     border-bottom: 1px solid rgba(128, 128, 128, 0.596);
 }
+.grey-bg{
+    background-color: rgb(170, 164, 164);
+}
+.link{
+    color: black;
+    text-decoration: underline;
+}

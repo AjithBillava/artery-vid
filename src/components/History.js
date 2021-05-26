@@ -1,8 +1,9 @@
 import { useData } from "../contexts/DataDispatch"
 import { Link } from "react-router-dom";
+import {ADD_TO_HISTORY} from "../reducers/DataReducer"
 
 export const History = () =>{
-    const {history} = useData()
+    const {history,dataDispatch} = useData()
     console.log(history)
     return(
         <div className="main-layout">
@@ -12,9 +13,10 @@ export const History = () =>{
                 <hr/>
             <div className="wrap">
             {
-               history.map(({id,name,imageURL,videoURL,duration,details})=>(
-                <Link to={`/${id}`} className="thumbnail " 
-                key={id}
+               history.map(({_id,name,imageURL,videoURL,duration,details})=>(
+                <Link to={`/${_id}`} className="thumbnail " 
+                onClick={()=>dataDispatch({type:ADD_TO_HISTORY,video:{_id,name,imageURL,videoURL,duration,details}})}
+                key={_id}
                 >
                     <div className="badge-container vertical-card ">
                         <img src={imageURL} style={{height:"150px",width:"250px"}} alt={name}/>

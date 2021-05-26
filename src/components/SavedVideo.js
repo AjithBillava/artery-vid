@@ -1,5 +1,6 @@
 import { useData } from "../contexts/DataDispatch"
 import { Link } from "react-router-dom";
+import { NoItemsInComponent } from "./Library";
 
 export const SavedVideos = ()=>{
     const {library} = useData()
@@ -12,6 +13,7 @@ export const SavedVideos = ()=>{
                 <hr/>
             <div className="wrap">
             {
+                savedVideos.length!==0?
                savedVideos.map(({_id,name,imageURL,videoURL,duration,details})=>(
                 <Link to={`/${_id}`} className="thumbnail " 
                 key={_id}
@@ -24,7 +26,9 @@ export const SavedVideos = ()=>{
                         {name}
                     </div>
                 </Link>
-            ))
+                ))
+                :
+                <NoItemsInComponent action="saved" />
             }
             </div>
             </div>

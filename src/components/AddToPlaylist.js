@@ -2,13 +2,6 @@ import { useState } from "react"
 import { useData } from "../contexts/DataDispatch"
 import { checkItem } from "../components/VideoDetails";
 
-export const checkItemInPlaylist = (playlist,playlistId, id) => {
-
-    
-    return playlist
-      .find((list) => list.id === playlistId)
-      .videos.some((video) => video.id === id);
-  };
 
 const CreateNewPlaylist = ({setShowPlaylist,showPlaylist}) =>{
     const {dataDispatch} = useData()
@@ -36,7 +29,7 @@ export const AddToPlaylist = ( {show,setShow} ) =>{
 
     const {library,dataDispatch,currVideo} = useData()
     const playlist=library.playlist;
-    
+  
     return(
         
         <div className="playlist center">
@@ -50,7 +43,6 @@ export const AddToPlaylist = ( {show,setShow} ) =>{
                <div className="border-bottom">
                {
                    playlist.map((item)=>(
-                    //    <div key={item.id}>
                            <label key={item._id} htmlFor={item._id} className="space-between align-center " >
                                 <input type="checkbox" 
                                 onClick={()=>{!checkItem(item.videos,currVideo._id)?

@@ -13,7 +13,7 @@ export const DataReducer =( state, {type,video,_id,playListName,currVid})=>{
     const {history,library}=state;
     
     console.log(state.library.playlist.videos)
-    console.log(_id)
+    // console.log(currVid._id)
     switch(type){
         case ADD_TO_HISTORY:
             return{
@@ -46,7 +46,7 @@ export const DataReducer =( state, {type,video,_id,playListName,currVid})=>{
                 library:{
                     ...library,playlist:library.playlist.map(
                         (item)=>{
-                            if(item.id===_id){
+                            if(item._id===_id){
                                 return{...item,videos:[...item.videos,currVid]}
                             }
                             return item

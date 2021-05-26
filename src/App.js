@@ -8,6 +8,7 @@ import { VideoDetails } from './components/VideoDetails';
 import {LikedVideos} from "./components/LikedVideos"
 import {SavedVideos} from "./components/SavedVideo";
 import { PlayList } from './components/Playlist';
+import { CurrentPlaylist } from './components/CurrentPlaylist';
 function App() {
   return (
     <div className="App">
@@ -15,14 +16,13 @@ function App() {
       
       <Routes>
         <Route path="/" element={<Home/>} />
-        <Route path="/:videoID" element={<VideoDetails/>} />
+        <Route path="/:currVideoID" element={<VideoDetails/>} />
         <Route path="/history" element={<History/>} />
         <Route path="/library" element={<Library/>} />
         <Route path="/liked-videos" element={<LikedVideos/>} />
         <Route path="/saved-videos" element={<SavedVideos/>} />
         <Route path="/playlist-videos" element={<PlayList/>} />
-        <Route path="/playlist-videos/:videoID" element={<VideoDetails/>} />
-
+        <Route path="/playlist-videos/:selected_playlist_ID" element={<CurrentPlaylist/>} />
       </Routes>
     </div>
    
