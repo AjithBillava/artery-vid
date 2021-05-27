@@ -40,6 +40,11 @@ export const DataReducer =( state, {type,video,_id,playListName,currVid})=>{
             return{
                 ...state,library:{...library,playlist:library.playlist.concat({_id:v4(),name:playListName,videos:[]})}
             }
+        case "REMOVE_PLAYLIST":
+            console.log(_id)
+            return{
+                ...state,library:{...library ,playlist:library.playlist.filter((item)=>item._id!==_id)}
+            }    
         case "ADD_TO_PLAYLIST":
             // console.log(currVid)
             return {...state,

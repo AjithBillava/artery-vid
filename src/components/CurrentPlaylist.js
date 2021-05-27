@@ -2,14 +2,26 @@ import { useData } from "../contexts/DataDispatch"
 import { Link, useParams } from "react-router-dom";
 // import {ADD_TO_HISTORY} from "../reducers/DataReducer"
 import {ADD_TO_HISTORY} from "../reducers/DataReducer"
+import { DeleteModal } from "./ModalForDelete";
+import { useState } from "react/cjs/react.development";
 
-export const VideoList = ({videos,name:playListName}) =>{
+export const VideoList = ({videos,name:playListName,playlist_id}) =>{
     const {dataDispatch} = useData()
     console.log(videos)
+    const [show,setShow] = useState(false)
     return(
         <div className="container right-pad ">
-                <h1>{playListName}</h1>
-                <hr/>
+                <div className="horizontal align-center">
+                    <h1>{playListName}</h1>
+                    {/* <Link to="/playlist-videos" onClick={()=>dataDispatch({type:"REMOVE_PLAYLIST",_id:playlist_id})} className="btn primary-btn pd-0-2">
+                    <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" style={{width:"1rem",fill:"black"}} ><g ><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path></g></svg>
+                    </Link> */}
+                    <button onClick={()=>setShow(!show)} className="btn primary-btn pd-0-2">
+                        <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" style={{width:"1rem",fill:"black"}} ><g ><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path></g></svg>
+                    </button>
+                    {show && <DeleteModal setShow={setShow} show={show} playListName={playListName} playlist_id={playlist_id}/>}
+                    <hr/>
+                </div>
                 <div className="wrap">
                     {videos.length!==0?
                         videos.slice(0,4).map(({_id,name,imageURL,videoURL,duration,details})=>(
@@ -29,7 +41,7 @@ export const VideoList = ({videos,name:playListName}) =>{
                         ))
                         :
                         <div  className="horizontal-card align-center md-txt">
-                            There are no videos in {playListName}
+                            There are no videos in "{playListName}" play-list
                         </div>
                     }
                 </div>           
@@ -44,23 +56,18 @@ export const CurrentPlaylist = () =>{
     const {library} = useData()
     const playlist=library.playlist;
     const {selected_playlist_ID} = useParams()
-    console.log(selected_playlist_ID)
-    // console.log(playlist)
-
-
-    const currentPlaylistIndex= playlist.findIndex(list=>list._id!==selected_playlist_ID)
+    console.log(selected_playlist_ID) 
 
     const currentPlaylist= playlist.filter(list=>list._id===selected_playlist_ID)
-    // const currentPlaylist= playlist.find(list=>list._id!==selected_playlist_ID)
     console.log(currentPlaylist)
 
-    console.log(currentPlaylistIndex)
+    
     return(
         <div className="main-layout">
          {
              currentPlaylist.map(({name,videos})=>(
                 
-                <VideoList name={name} videos={videos} />
+                <VideoList name={name} videos={videos} playlist_id={selected_playlist_ID} />
             
             ))
          }       

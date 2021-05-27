@@ -1,8 +1,11 @@
 import { useData } from "../contexts/DataDispatch"
 import { Link } from "react-router-dom";
 import {ADD_TO_HISTORY} from "../reducers/DataReducer"
+import { useState } from "react/cjs/react.development";
+import { CreateNewPlaylist } from "./CreateNewPlayList";
 
 export const PlayList = ()=> {
+    const [showPlaylist,setShowPlaylist] = useState(false);
 
     const {library,dataDispatch} =useData()
     const playlist=library.playlist;
@@ -11,14 +14,27 @@ export const PlayList = ()=> {
         <div className="main-layout">
             
             <div className="container right-pad">
-            <h1>Playlist Videos</h1>
+                <div className="horizontal align-center">
+                    <h1>Playlist Videos</h1>
+                    <button className="btn primary-btn pd-0-2" title="new playlist" onClick={()=>setShowPlaylist(!showPlaylist)} >+</button>
+                    <div>
+                        {showPlaylist &&
+                        <div className="new-playlist curve pd-0-2 md-width-card add-to-playlist">
+                            <button className="dismiss-btn top-right" onClick={()=>setShowPlaylist(!setShowPlaylist)}>x</button>
+                            <CreateNewPlaylist showPlaylist={showPlaylist} setShowPlaylist={setShowPlaylist} />
+                        </div>
+                        }
+                    </div>
+                </div>
                 <hr/>
+
             <div >
             {
+                playlist.length!==0?
                playlist.map(({name,videos,_id:playlistID})=>(
                  
                 <div  >
-                    {videos.length!==0?
+                    {videos.length>4?
                     <div className="md-txt space-between align-center">
                         <p>{name}</p>
                         <Link className="see-all-link" to={`/playlist-videos/${playlistID}`}> see all</Link>
@@ -47,7 +63,12 @@ export const PlayList = ()=> {
                        }
                     </div>
                 </div>
-            ))
+            )):
+            (
+                <div className="md-txt">
+                    There are no playlist
+                </div>
+            )
             }
             </div>
             </div>

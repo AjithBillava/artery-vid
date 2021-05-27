@@ -68,8 +68,14 @@ a{
 .icon-btn{
     fill:gray
 }
-
-
+.horizontal{
+    display: flex;
+    flex-direction: row;
+}
+.pd-0-2{
+    padding: 0.5rem;
+    /* margin:0.5rem */
+}
 .playlist{
     position: absolute;
     background-color: rgba(0, 0, 0, 0.507);
@@ -88,11 +94,25 @@ a{
 .add-to-playlist *{
     color: white;
 }
+.primary-btn{
+    color:black
+}
+.link-btn:hover{
+    color: black;
+}
+.dismiss-btn{
+    color: black;
+}
 .create-playlist{
     display: flex;
     flex-direction: column;
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     flex-wrap: wrap;
+}
+.new-playlist{
+    z-index: 5;
+    position: absolute;
+    /* right: 0; */
 }
 .error-color{
     color: var(--error-color);

@@ -13,6 +13,7 @@ export const History = () =>{
                 <hr/>
             <div className="wrap">
             {
+                history.length!==0?
                history.map(({_id,name,imageURL,videoURL,duration,details})=>(
                 <Link to={`/${_id}`} className="thumbnail " 
                 onClick={()=>dataDispatch({type:ADD_TO_HISTORY,video:{_id,name,imageURL,videoURL,duration,details}})}
@@ -27,6 +28,14 @@ export const History = () =>{
                     </div>
                 </Link>
             ))
+            :
+            (
+                <div className="md-txt center">
+                    <div>
+                    You have not watched any videos
+                    </div>
+                </div>
+            )
             }
             </div>
             </div>
