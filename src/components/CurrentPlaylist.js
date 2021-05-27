@@ -1,8 +1,10 @@
 import { useData } from "../contexts/DataDispatch"
 import { Link, useParams } from "react-router-dom";
 // import {ADD_TO_HISTORY} from "../reducers/DataReducer"
+import {ADD_TO_HISTORY} from "../reducers/DataReducer"
 
 export const VideoList = ({videos,name:playListName}) =>{
+    const {dataDispatch} = useData()
     console.log(videos)
     return(
         <div className="container right-pad ">
@@ -12,6 +14,8 @@ export const VideoList = ({videos,name:playListName}) =>{
                     {videos.length!==0?
                         videos.slice(0,4).map(({_id,name,imageURL,videoURL,duration,details})=>(
                             <Link to={`/${_id}`} className="thumbnail " 
+                    onClick={()=>dataDispatch({type:ADD_TO_HISTORY,video:{_id,name,imageURL,videoURL,duration,details}})}
+
                             key={_id}
                             >
                                 <div className="badge-container vertical-card ">

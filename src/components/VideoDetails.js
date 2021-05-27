@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import { useParams } from "react-router";
+import { useParams } from "react-router";
 import { useData } from "../contexts/DataDispatch";
 import {ADD_TO_LIKED_LIBRARY,REMOVE_FROM_LIBRARY, SAVE_VIDEO, UNSAVE_VIDEO} from "../reducers/DataReducer"
 import {AddToPlaylist} from "./AddToPlaylist"
@@ -14,13 +14,17 @@ export const VideoDetails = () =>{
     const {dataDispatch,currVideo,library} =useData()
     const LikedVideos=library.liked;
     const SavedVideos=library.saved;
+
+    console.log(currVideo)
     const video=currVideo;
-    // const {currVideoID} =useParams()
+    const {currVideoID} =useParams()
+
+    console.log(currVideoID,video._id)
     return(
         <div className="main-layout "> 
             <div className="container center ">
-                {/* {
-                     currVideoID===video._id? */}
+                {
+                     currVideoID===video._id?
                 <div className="section ">
                     <div >
                     <iframe width="100%" height="335" src={video.videoURL} 
@@ -72,12 +76,12 @@ export const VideoDetails = () =>{
                     </div>
 
                 </div>
-                {/* // :
-                // <div>
-                //     broken link
-                // </div>
+                :
+                <div>
+                    broken link
+                </div>
 
-            //    } */}
+               } 
                 
             </div>
              {show&&<AddToPlaylist show={show} setShow={setShow}  />}

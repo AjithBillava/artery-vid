@@ -1,4 +1,5 @@
-import { useData } from "../contexts/DataDispatch"
+import { useData } from "../contexts/DataDispatch";
+import {ADD_TO_HISTORY} from "../reducers/DataReducer"
 import { Link } from "react-router-dom";
 
 export const NoItemsInComponent = ({action}) =>{
@@ -14,7 +15,7 @@ export const NoItemsInComponent = ({action}) =>{
 
 
 export const Library =() =>{
-    const {library} = useData()
+    const {library , dataDispatch} = useData()
     const likedVideos=library.liked;
     const savedVideos=library.saved;
     
@@ -33,8 +34,10 @@ export const Library =() =>{
                 </div>
                 <div className="wrap">
                 {
-                    likedVideos.slice(0,4).map(({_id,name,imageURL,duration})=>(
+                    likedVideos.slice(0,4).map(({_id,name,imageURL,duration,videoURL,details})=>(
                     <Link to={`/${_id}`} className="thumbnail " 
+                    onClick={()=>dataDispatch({type:ADD_TO_HISTORY,video:{_id,name,imageURL,videoURL,duration,details}})}
+
                     key={_id}
                     >
                         <div className="badge-container vertical-card ">
@@ -64,8 +67,9 @@ export const Library =() =>{
                     </div>
                     <div className="wrap">
                     {
-                        savedVideos.slice(0,4).map(({_id,name,imageURL,duration})=>(
+                        savedVideos.slice(0,4).map(({_id,name,imageURL,duration,videoURL,details})=>(
                         <Link to={`/${_id}`} className="thumbnail " 
+                    onClick={()=>dataDispatch({type:ADD_TO_HISTORY,video:{_id,name,imageURL,videoURL,duration,details}})}
                         key={_id}
                         >
                             <div className="badge-container vertical-card ">

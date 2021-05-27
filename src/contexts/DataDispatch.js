@@ -30,7 +30,7 @@ export const DataProvider = ({children}) =>{
             history,
             library,
             // playlist,
-            currVideo:currVideo,
+            currVideo,
             dataDispatch:dispatch
         }}>
         {children}

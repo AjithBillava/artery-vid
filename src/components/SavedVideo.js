@@ -1,9 +1,10 @@
-import { useData } from "../contexts/DataDispatch"
+import { useData } from "../contexts/DataDispatch";
+import {ADD_TO_HISTORY} from "../reducers/DataReducer"
 import { Link } from "react-router-dom";
 import { NoItemsInComponent } from "./Library";
 
 export const SavedVideos = ()=>{
-    const {library} = useData()
+    const {library,dataDispatch} = useData()
     const savedVideos=library.saved;
     return(
         <div className="main-layout">
@@ -16,6 +17,8 @@ export const SavedVideos = ()=>{
                 savedVideos.length!==0?
                savedVideos.map(({_id,name,imageURL,videoURL,duration,details})=>(
                 <Link to={`/${_id}`} className="thumbnail " 
+                onClick={()=>dataDispatch({type:ADD_TO_HISTORY,video:{_id,name,imageURL,videoURL,duration,details}})}
+
                 key={_id}
                 >
                     <div className="badge-container vertical-card ">

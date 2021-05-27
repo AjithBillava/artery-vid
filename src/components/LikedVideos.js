@@ -1,9 +1,10 @@
-import { useData } from "../contexts/DataDispatch"
+import { useData } from "../contexts/DataDispatch";
+import {ADD_TO_HISTORY} from "../reducers/DataReducer"
 import { Link } from "react-router-dom";
 import { NoItemsInComponent } from "./Library";
 
 export const LikedVideos = ()=>{
-    const {library} = useData()
+    const {library,dataDispatch} = useData()
     const likedVideos=library.liked;
     console.log(likedVideos)
     return(
@@ -17,6 +18,8 @@ export const LikedVideos = ()=>{
                 likedVideos.length!==0?
                 likedVideos.map(({_id,name,imageURL,videoURL,duration,details})=>(
                     <Link to={`/${_id}`} className="thumbnail " 
+                    onClick={()=>dataDispatch({type:ADD_TO_HISTORY,video:{_id,name,imageURL,videoURL,duration,details}})}
+
                     key={_id}
                     >
                         <div className="badge-container vertical-card ">
