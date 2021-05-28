@@ -1,7 +1,7 @@
 import { useData } from "../contexts/DataDispatch"
 import { Link } from "react-router-dom";
 import {ADD_TO_HISTORY} from "../reducers/DataReducer"
-import { useState } from "react/cjs/react.development";
+import { useState } from "react";
 import { CreateNewPlaylist } from "./CreateNewPlayList";
 
 export const PlayList = ()=> {
