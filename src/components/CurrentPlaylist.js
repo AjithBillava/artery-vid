@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 // import {ADD_TO_HISTORY} from "../reducers/DataReducer"
 import {ADD_TO_HISTORY} from "../reducers/DataReducer"
 import { DeleteModal } from "./ModalForDelete";
-import { useState } from "react/cjs/react.development";
+import { useState } from "react";
 
 export const VideoList = ({videos,name:playListName,playlist_id}) =>{
     const {dataDispatch} = useData()
