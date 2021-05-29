@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useData } from "../contexts/DataDispatch"
-import { checkItem } from "../components/VideoDetails";
+import { checkItem } from "../utils/CheckItem";
 import { CreateNewPlaylist } from "./CreateNewPlayList";
 
 
