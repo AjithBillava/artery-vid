@@ -5,7 +5,7 @@ import { CreateNewPlaylist } from "./CreateNewPlayList";
 
 
 
-export const AddToPlaylist = ( {show,setShow} ) =>{
+export const AddToPlaylist = ( {show,setShow,showToast,setShowToast} ) =>{
     const [showPlaylist,setShowPlaylist] = useState(false);
 
     const {library,dataDispatch,currVideo} = useData()
@@ -26,9 +26,15 @@ export const AddToPlaylist = ( {show,setShow} ) =>{
                    playlist.map((item)=>(
                            <label key={item._id} htmlFor={item._id} className="space-between align-center " >
                                 <input type="checkbox" 
-                                onClick={()=>{!checkItem(item.videos,currVideo._id)?
-                                    dataDispatch({type:"ADD_TO_PLAYLIST",currVid:{...currVideo,selectedPlaylist:true},_id:item._id}):
-                                    dataDispatch({type:"REMOVE_FROM_PLAYLIST",currVid:{...currVideo,selectedPlaylist:false},_id:item._id})}}
+                                onClick={()=>{
+                                    if(!checkItem(item.videos,currVideo._id)){
+                                        dataDispatch({type:"ADD_TO_PLAYLIST",currVid:{...currVideo,selectedPlaylist:true},_id:item._id})
+                                        setShowToast(!showToast)
+                                    }
+                                    else{
+                                        dataDispatch({type:"REMOVE_FROM_PLAYLIST",currVid:{...currVideo,selectedPlaylist:false},_id:item._id})
+                                        setShowToast(!showToast)
+                                    }}}
                                 _id={item._id}
                                 checked={checkItem(item.videos,currVideo._id)} 
                             ></input>
@@ -42,7 +48,7 @@ export const AddToPlaylist = ( {show,setShow} ) =>{
                    <div>+</div>
                    <div>Create new playlist</div>
                </div>}
-               {showPlaylist && <CreateNewPlaylist showPlaylist={showPlaylist} setShowPlaylist={setShowPlaylist} />}
+               {showPlaylist && <CreateNewPlaylist showToast={showToast} setShowToast={setShowToast} showPlaylist={showPlaylist} setShowPlaylist={setShowPlaylist} />}
 
            </div>
         </div>

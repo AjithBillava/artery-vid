@@ -16,13 +16,14 @@ export const dataList = {
             }
         ]
     },
-    currVideo:[]
+    currVideo:[],
+    toastMessage:""
 }
 
 export const DataContext = createContext();
 
 export const DataProvider = ({children}) =>{
-    const [{history,library,currVideo}, dispatch] = useReducer(DataReducer, dataList)
+    const [{history,library,currVideo,toastMessage}, dispatch] = useReducer(DataReducer, dataList)
 
     return(
         <DataContext.Provider 
@@ -31,6 +32,7 @@ export const DataProvider = ({children}) =>{
             library,
             // playlist,
             currVideo,
+            toastMessage,
             dataDispatch:dispatch
         }}>
         {children}

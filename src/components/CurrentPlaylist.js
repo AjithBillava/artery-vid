@@ -13,9 +13,7 @@ export const VideoList = ({videos,name:playListName,playlist_id}) =>{
         <div className="container right-pad ">
                 <div className="horizontal align-center">
                     <h1>{playListName}</h1>
-                    {/* <Link to="/playlist-videos" onClick={()=>dataDispatch({type:"REMOVE_PLAYLIST",_id:playlist_id})} className="btn primary-btn pd-0-2">
-                    <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" style={{width:"1rem",fill:"black"}} ><g ><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path></g></svg>
-                    </Link> */}
+
                     <button onClick={()=>setShow(!show)} className="btn primary-btn pd-0-2">
                         <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" style={{width:"1rem",fill:"black"}} ><g ><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path></g></svg>
                     </button>

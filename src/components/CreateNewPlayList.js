@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useData } from "../contexts/DataDispatch"
 
-export const CreateNewPlaylist = ({setShowPlaylist,showPlaylist}) =>{
+export const CreateNewPlaylist = ({setShowPlaylist,showPlaylist,showToast,setShowToast}) =>{
     const {dataDispatch} = useData()
     const [playListName,setPlayListName] =useState("")
     const [error,setError] = useState("")
@@ -15,6 +15,7 @@ export const CreateNewPlaylist = ({setShowPlaylist,showPlaylist}) =>{
             <button className="btn sm-btn primary-btn" onClick={()=>{
                 playListName && dataDispatch({type:"ADD_PLAYLIST",playListName:`${playListName}`})
                 playListName && setShowPlaylist(!showPlaylist)
+                playListName && setShowToast(!showToast)
                 !playListName && setError("please enter playlist name")
                 }} >create</button>
             </div>

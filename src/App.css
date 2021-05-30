@@ -102,6 +102,8 @@ a{
 }
 .dismiss-btn{
     color: black;
+    cursor: pointer;
+    z-index: 2;
 }
 .create-playlist{
     display: flex;
@@ -131,3 +133,21 @@ a{
     color: black;
     text-decoration: underline;
 }
+.toast-message{
+    position: absolute;
+    margin-top: 2rem;
+    margin-right: 2rem;
+    color: black;
+    background-color: white;
+    box-shadow: 0.2rem 0.2rem 1rem rgb(0 0 0 / 56%);
+  }
+  .toast-container{
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    z-index: 6;
+  }
+  .top-right{
+      top:0;
+      right: 0;
+  }

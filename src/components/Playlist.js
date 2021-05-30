@@ -4,7 +4,7 @@ import {ADD_TO_HISTORY} from "../reducers/DataReducer"
 import { useState } from "react";
 import { CreateNewPlaylist } from "./CreateNewPlayList";
 
-export const PlayList = ()=> {
+export const PlayList = ({showToast,setShowToast})=> {
     const [showPlaylist,setShowPlaylist] = useState(false);
 
     const {library,dataDispatch} =useData()
@@ -21,7 +21,7 @@ export const PlayList = ()=> {
                         {showPlaylist &&
                         <div className="new-playlist curve pd-0-2 md-width-card add-to-playlist">
                             <button className="dismiss-btn top-right" onClick={()=>setShowPlaylist(!setShowPlaylist)}>x</button>
-                            <CreateNewPlaylist showPlaylist={showPlaylist} setShowPlaylist={setShowPlaylist} />
+                            <CreateNewPlaylist showToast={showToast} setShowToast={setShowToast} showPlaylist={showPlaylist} setShowPlaylist={setShowPlaylist} />
                         </div>
                         }
                     </div>
