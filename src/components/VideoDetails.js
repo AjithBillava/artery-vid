@@ -18,7 +18,7 @@ export const VideoDetails = ({showToast,setShowToast}) =>{
 
     // console.log(currVideoID,video._id)
     return(
-        <div className="main-layout "> 
+        <div className="main-section"> 
             <div className="container center ">
                 {
                      currVideoID===video._id?
@@ -34,7 +34,7 @@ export const VideoDetails = ({showToast,setShowToast}) =>{
 
                     <div className="space-between">
                     <i className="icon-btn btn"
-                    title="save"
+                    title="like"
                     style={{
                         fill: `${checkItem(LikedVideos,video._id) ? "var(--primary-bg)" : "grey"}`
                       }}
@@ -60,7 +60,7 @@ export const VideoDetails = ({showToast,setShowToast}) =>{
                         </svg>
                     </i>
                     <i className="icon-btn btn"
-                    title="like"
+                    title="save"
                     style={{
                         fill: `${checkItem(SavedVideos,video._id) ? "var(--primary-bg)" : "grey"}`
                       }}

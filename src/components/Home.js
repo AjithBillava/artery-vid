@@ -8,7 +8,7 @@ export const Home = ()=>{
     const VideoDB = useAxios()
     // console.log(VideoDB)
     return(
-        <div className="main-layout">
+        <div className="main-section">
             
             <div className="container right-pad">
             <h1>Artery-Videos</h1>

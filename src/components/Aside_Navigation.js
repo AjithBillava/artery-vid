@@ -1,12 +1,13 @@
 import { NavLink}from "react-router-dom"
 
-export const AsideNav = ( ) =>{
+export const AsideNav = ( {showSideNav} ) =>{
     return(
         
-        <div className="aside-nav">
+        // <div className="side-nav" style={{display:showSideNav}}>
+        <div className="side-nav" style={{display:showSideNav}}>
 
         <div className="list vertical-card">
-            <NavLink end className="spaced-list-item" to="/" activeStyle={{
+            <NavLink className="horizontal align-center  spaced-list-item" end  to="/" activeStyle={{
             fontWeight: "bold",
             color: "red"
           }}> Home</NavLink>
@@ -33,7 +34,13 @@ export const AsideNav = ( ) =>{
           }}>Playlist videos</NavLink>
 
 
+{/* <svg className="icon-btn  relative-box" viewBox="0 0 24 24" >
+              <g class="style-scope yt-icon">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8" class="style-scope yt-icon"></path>
+              </g>
+            </svg> */}
         </div>
         </div>
     )
 }
+

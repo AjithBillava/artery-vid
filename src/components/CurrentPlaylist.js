@@ -20,6 +20,8 @@ export const VideoList = ({videos,name:playListName,playlist_id}) =>{
                     {show && <DeleteModal setShow={setShow} show={show} playListName={playListName} playlist_id={playlist_id}/>}
                     <hr/>
                 </div>
+            <hr/>
+
                 <div className="wrap">
                     {videos.length!==0?
                         videos.slice(0,4).map(({_id,name,imageURL,videoURL,duration,details})=>(
@@ -61,7 +63,7 @@ export const CurrentPlaylist = () =>{
 
     
     return(
-        <div className="main-layout">
+        <div className="main-section">
          {
              currentPlaylist.map(({name,videos})=>(
                 

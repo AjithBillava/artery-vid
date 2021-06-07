@@ -6,7 +6,7 @@ export const History = () =>{
     const {history,dataDispatch} = useData()
     console.log(history)
     return(
-        <div className="main-layout">
+        <div className="main-section">
             
             <div className="container right-pad">
             <h1>History</h1>
@@ -30,7 +30,7 @@ export const History = () =>{
             ))
             :
             (
-                <div className="md-txt center">
+                <div className="md-txt center horizontal-card">
                     <div>
                     You have not watched any videos
                     </div>

@@ -11,7 +11,7 @@ export const PlayList = ({showToast,setShowToast})=> {
     const playlist=library.playlist;
 
     return(
-        <div className="main-layout">
+        <div className="main-section">
             
             <div className="container right-pad">
                 <div className="horizontal align-center">
@@ -28,12 +28,12 @@ export const PlayList = ({showToast,setShowToast})=> {
                 </div>
                 <hr/>
 
-            <div >
+            <div className="mg-top-2 " >
             {
                 playlist.length!==0?
                playlist.map(({name,videos,_id:playlistID})=>(
                  
-                <div key={playlistID} >
+                <div  key={playlistID} >
                     {videos.length>4?
                     <div className="md-txt space-between align-center">
                         <p>{name}</p>

@@ -7,7 +7,7 @@ export const SavedVideos = ()=>{
     const {library,dataDispatch} = useData()
     const savedVideos=library.saved;
     return(
-        <div className="main-layout">
+        <div className="main-section">
             
             <div className="container right-pad">
             <h1>Saved Videos</h1>

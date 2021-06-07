@@ -8,7 +8,7 @@ export const LikedVideos = ()=>{
     const likedVideos=library.liked;
     console.log(likedVideos)
     return(
-        <div className="main-layout">
+        <div className="main-section">
             
             <div className="container right-pad">
             <h1>Liked Videos</h1>

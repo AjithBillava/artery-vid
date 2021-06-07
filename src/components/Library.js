@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export const NoItemsInComponent = ({action}) =>{
     return(
-        <div className="horizontal-card align-center md-txt border-bottom">
+        <div className="horizontal-card align-center full-width md-txt border-bottom">
             <div>
                 You have not {action} any video
             </div>
@@ -20,7 +20,7 @@ export const Library =() =>{
     const savedVideos=library.saved;
     
     return(
-        <div className="main-layout">
+        <div className="main-section">
             
             <div className="container right-pad">
             <h1>Your Library</h1>
@@ -61,9 +61,10 @@ export const Library =() =>{
 
                {savedVideos.length!==0?
                (<div >
-                <div className="space-between align-center">
+                <div className="md-txt space-between align-center">
                         <p>Saved videos</p>
-                        <Link className="md-txt" to="/saved-videos"> see all</Link>
+                        <Link className="see-all-link" to="/saved-videos"> see all</Link>
+
                     </div>
                     <div className="wrap">
                     {
