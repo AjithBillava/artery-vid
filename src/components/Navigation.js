@@ -7,7 +7,8 @@ export const HambergerBtn = ({showSideNav, setShowSideNav}) =>{
     return(
         <div >
             <svg className="hamberger-btn" onClick={()=>{
-                (showSideNav==="flex")? setShowSideNav("none"):setShowSideNav("flex")}} viewBox="0 0 100 80" width="30" height="30">
+                // (showSideNav==="flex")? setShowSideNav("none"):setShowSideNav("flex")}} viewBox="0 0 100 80" width="30" height="30">
+                setShowSideNav(!showSideNav)}} viewBox="0 0 100 80" width="30" height="30">
                 <rect width="100" height="20"></rect>
                 <rect y="30" width="100" height="20"></rect>
                 <rect y="60" width="100" height="20"></rect>
@@ -17,12 +18,9 @@ export const HambergerBtn = ({showSideNav, setShowSideNav}) =>{
 }
 
 export const Navigation = () =>{
-    const [showSideNav, setShowSideNav] = useState("")
-    // useEffect(()=>{
-    //     if(window.innerWidth>="1024px"){
-    //         setShowSideNav(!showSideNav)
-    //     }
-    // },[showSideNav])
+    const [showSideNav, setShowSideNav] = useState(true)
+    // const [showSideNav, setShowSideNav] = useState("")
+  
     return( 
         <div>
             <nav className="header align-center">
@@ -39,8 +37,8 @@ export const Navigation = () =>{
                 </div>
             </nav>
         {/* <div className="aside-nav"> */}
-        {/* {showSideNav && <AsideNav/>} */}
-        <AsideNav showSideNav={showSideNav  } />
+        {showSideNav && <AsideNav/>}
+        {/* <AsideNav showSideNav={showSideNav  } /> */}
 
         {/* </div> */}
         
