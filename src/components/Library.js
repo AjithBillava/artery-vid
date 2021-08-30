@@ -1,4 +1,4 @@
-import { useData } from "../contexts/DataDispatch";
+import { useData } from "../contexts/DataContext";
 import {ADD_TO_HISTORY} from "../reducers/DataReducer"
 import { Link } from "react-router-dom";
 
@@ -15,7 +15,7 @@ export const NoItemsInComponent = ({action}) =>{
 
 
 export const Library =() =>{
-    const {library , dataDispatch} = useData()
+    const {state:{library }, dataDispatch} = useData()
     const likedVideos=library.liked;
     const savedVideos=library.saved;
     

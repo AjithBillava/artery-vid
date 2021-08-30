@@ -8,13 +8,48 @@ export const REMOVE_FROM_LIBRARY="REMOVE_FROM_LIBRARY"
 export const SAVE_VIDEO="SAVE_VIDEO"
 export const UNSAVE_VIDEO="UNSAVE_VIDEO"
 
-export const DataReducer =( state, {type,video,_id,playListName,currVid})=>{
+export const dataReducer =( state, {type,video,_id,playListName,currVid,payload})=>{
 
     const {history,library}=state;
     
    
     // console.log(currVid._id)
     switch(type){
+        case "SET_LOADING":
+            return {
+                ...state,isLoading:payload
+            }
+        case "SET_VIDEOS":
+            return{
+                ...state,videoData:payload
+            }
+        case "SET_USER":
+            return{
+                ...state,
+                user:payload.user,
+                isAuthenticated:true,
+                history:payload.user?.history[0]?.videos,
+                library:{...library,
+                    liked:payload.user?.likedVideos[0]?.videos,
+                    saved:payload.user?.savedVideos[0]?.videos,
+                    playlist:payload.user?.playLists[0]?.playLists
+                }
+            }
+        case "LOGIN_USER":
+            localStorage.setItem("token",payload.token)
+            localStorage.setItem("isAuthenticated",true)
+            return{
+                ...state,
+                user:payload.user,
+                isAuthenticated:true,
+                history:payload.user?.history[0]?.videos,
+                library:{...library,
+                    liked:payload.user?.likedVideos[0]?.videos,
+                    saved:payload.user?.savedVideos[0]?.videos,
+                    playlist:payload.user?.playLists[0]?.playLists
+                }
+            }
+            
         case ADD_TO_HISTORY:
             return{
                 ...state,history:history.concat(video),

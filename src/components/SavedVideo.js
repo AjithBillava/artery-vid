@@ -1,10 +1,10 @@
-import { useData } from "../contexts/DataDispatch";
+import { useData } from "../contexts/DataContext";
 import {ADD_TO_HISTORY} from "../reducers/DataReducer"
 import { Link } from "react-router-dom";
 import { NoItemsInComponent } from "./Library";
 
 export const SavedVideos = ()=>{
-    const {library,dataDispatch} = useData()
+    const {state:{library},dataDispatch} = useData()
     const savedVideos=library.saved;
     return(
         <div className="main-section">

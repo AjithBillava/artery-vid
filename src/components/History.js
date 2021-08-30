@@ -1,9 +1,10 @@
-import { useData } from "../contexts/DataDispatch"
+import { useData } from "../contexts/DataContext"
 import { Link } from "react-router-dom";
 import {ADD_TO_HISTORY} from "../reducers/DataReducer"
 
 export const History = () =>{
-    const {history,dataDispatch} = useData()
+    const {state:{history},dataDispatch} = useData()
+    console.log(history)
     console.log(history)
     return(
         <div className="main-section">

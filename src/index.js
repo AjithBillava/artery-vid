@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter as Router} from "react-router-dom"
-import {  DataProvider } from './contexts/DataDispatch';
+import {  DataProvider } from './contexts/DataContext';
 ReactDOM.render(
   <React.StrictMode>
     <Router>

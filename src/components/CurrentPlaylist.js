@@ -1,4 +1,4 @@
-import { useData } from "../contexts/DataDispatch"
+import { useData } from "../contexts/DataContext"
 import { Link, useParams } from "react-router-dom";
 // import {ADD_TO_HISTORY} from "../reducers/DataReducer"
 import {ADD_TO_HISTORY} from "../reducers/DataReducer"
@@ -53,7 +53,7 @@ export const VideoList = ({videos,name:playListName,playlist_id}) =>{
 
 export const CurrentPlaylist = () =>{
 
-    const {library} = useData()
+    const {state:{library}} = useData()
     const playlist=library.playlist;
     const {selected_playlist_ID} = useParams()
     console.log(selected_playlist_ID) 
@@ -65,9 +65,9 @@ export const CurrentPlaylist = () =>{
     return(
         <div className="main-section">
          {
-             currentPlaylist.map(({name,videos})=>(
+             currentPlaylist.map(({playListName,videos})=>(
                 
-                <VideoList name={name} videos={videos} playlist_id={selected_playlist_ID} />
+                <VideoList name={playListName} videos={videos} playlist_id={selected_playlist_ID} />
             
             ))
          }       

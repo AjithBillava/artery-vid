@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useData } from "../contexts/DataDispatch"
+import { useData } from "../contexts/DataContext"
 import { checkItem } from "../utils/CheckItem";
 import { CreateNewPlaylist } from "./CreateNewPlayList";
 
@@ -8,7 +8,7 @@ import { CreateNewPlaylist } from "./CreateNewPlayList";
 export const AddToPlaylist = ( {show,setShow,showToast,setShowToast} ) =>{
     const [showPlaylist,setShowPlaylist] = useState(false);
 
-    const {library,dataDispatch,currVideo} = useData()
+    const {state:{library,currVideo},dataDispatch} = useData()
     const playlist=library.playlist;
   
     return(

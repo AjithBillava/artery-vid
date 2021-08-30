@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router";
-import { useData } from "../contexts/DataDispatch";
+import { useData } from "../contexts/DataContext";
 import {ADD_TO_LIKED_LIBRARY,REMOVE_FROM_LIBRARY, SAVE_VIDEO, UNSAVE_VIDEO} from "../reducers/DataReducer"
 import {AddToPlaylist} from "./AddToPlaylist"
 import { checkItem } from "../utils/CheckItem";
@@ -8,7 +8,7 @@ import { checkItem } from "../utils/CheckItem";
 export const VideoDetails = ({showToast,setShowToast}) =>{
     const [show,setShow] = useState(false)
 
-    const {dataDispatch,currVideo,library} =useData()
+    const {state:{currVideo,library},dataDispatch} =useData()
     const LikedVideos=library.liked;
     const SavedVideos=library.saved;
 

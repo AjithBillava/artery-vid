@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { useData } from "../contexts/DataDispatch"
+import { useData } from "../contexts/DataContext"
 
 export const DeleteModal = ({playListName,playlist_id,show,setShow}) =>{
     const {dataDispatch} = useData()

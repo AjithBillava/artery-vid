@@ -1,7 +1,7 @@
-import { useState } from "react";
+// import { useState } from "react";
 import {Link}from "react-router-dom"
 // import { useEffect } from "react/cjs/react.development";
-import { AsideNav } from "./Aside_Navigation";
+// import { AsideNav } from "./Aside_Navigation";
 
 export const HambergerBtn = ({showSideNav, setShowSideNav}) =>{
     return(
@@ -17,8 +17,8 @@ export const HambergerBtn = ({showSideNav, setShowSideNav}) =>{
     )
 }
 
-export const Navigation = () =>{
-    const [showSideNav, setShowSideNav] = useState(true)
+export const Navigation = ({showSideNav, setShowSideNav}) =>{
+    // const [showSideNav, setShowSideNav] = useState(true)
     // const [showSideNav, setShowSideNav] = useState("")
   
     return( 
@@ -30,6 +30,9 @@ export const Navigation = () =>{
                     <Link className="nav-links logo" to="/">Atery-Videos</Link>
                 </div>
                 <div>
+                    <Link className="btn md-btn primary-btn" to = "/login">
+                        Login
+                    </Link>
                     {/* <ul className="non-bullet nav-social-links inline-list align-center spa">
                         <li>notification</li>
                         <li>saved</li>
@@ -37,7 +40,7 @@ export const Navigation = () =>{
                 </div>
             </nav>
         {/* <div className="aside-nav"> */}
-        {showSideNav && <AsideNav/>}
+        {/* {showSideNav && <AsideNav/>} */}
         {/* <AsideNav showSideNav={showSideNav  } /> */}
 
         {/* </div> */}

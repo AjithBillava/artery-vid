@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-import { useData } from "../contexts/DataDispatch";
+import { useData } from "../contexts/DataContext";
 // import { VideoDB } from "../Video Lib data/videoData";
 import {ADD_TO_HISTORY} from "../reducers/DataReducer"
 import { useAxios } from "../server/server.request";
+import { LoaderComponent } from "./loader";
 export const Home = ()=>{
-    const {dataDispatch} =useData()
-    const VideoDB = useAxios()
+    const {state:{isLoading,videoData},dataDispatch} =useData()
+    // const VideoDB = useAxios()
     // console.log(VideoDB)
     return(
         <div className="main-section">
@@ -15,9 +16,9 @@ export const Home = ()=>{
                 <hr/>
             <div className="wrap" >
             {
-               VideoDB?
+            //    !isLoading?
                ( 
-                   VideoDB.map(({_id,name,imageURL,videoURL,duration,details})=>(
+                   videoData.map(({_id,name,imageURL,videoURL,duration,details})=>(
                     <Link to={`/${_id}`} className="thumbnail " 
                     onClick={()=>dataDispatch({type:ADD_TO_HISTORY,video:{_id,name,imageURL,videoURL,duration,details}})}
                     key={_id}
@@ -32,12 +33,10 @@ export const Home = ()=>{
                     </Link>
                 ))
                 )
-                :
-                (
-                    <div>
-                        Loading...
-                    </div>
-                )
+                // :
+                // (
+                //     <LoaderComponent/>
+                // )
             }
             </div>
         </div>

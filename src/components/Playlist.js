@@ -1,4 +1,4 @@
-import { useData } from "../contexts/DataDispatch"
+import { useData } from "../contexts/DataContext"
 import { Link } from "react-router-dom";
 import {ADD_TO_HISTORY} from "../reducers/DataReducer"
 import { useState } from "react";
@@ -7,7 +7,7 @@ import { CreateNewPlaylist } from "./CreateNewPlayList";
 export const PlayList = ({showToast,setShowToast})=> {
     const [showPlaylist,setShowPlaylist] = useState(false);
 
-    const {library,dataDispatch} =useData()
+    const {state:{library},dataDispatch} =useData()
     const playlist=library.playlist;
 
     return(
@@ -31,17 +31,17 @@ export const PlayList = ({showToast,setShowToast})=> {
             <div className="mg-top-2 " >
             {
                 playlist.length!==0?
-               playlist.map(({name,videos,_id:playlistID})=>(
+               playlist.map(({playListName,videos,_id:playlistID})=>(
                  
                 <div  key={playlistID} >
                     {videos.length>4?
                     <div className="md-txt space-between align-center">
-                        <p>{name}</p>
+                        <p>{playListName}</p>
                         <Link className="see-all-link" to={`/playlist-videos/${playlistID}`}> see all</Link>
                     </div>
                     :
                     <div className="md-txt space-between align-center">
-                        <Link className="link" to={`/playlist-videos/${playlistID}`}>{name}</Link>
+                        <Link className="link" to={`/playlist-videos/${playlistID}`}>{playListName}</Link>
                     </div>
                     }
                         <div className="wrap">

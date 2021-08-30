@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useData } from "../contexts/DataDispatch"
+import { useData } from "../contexts/DataContext"
 
 export const CreateNewPlaylist = ({setShowPlaylist,showPlaylist,showToast,setShowToast}) =>{
     const {dataDispatch} = useData()

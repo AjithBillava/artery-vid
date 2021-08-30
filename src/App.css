@@ -198,3 +198,10 @@ a{
       top:0;
       right: 0;
   }
+  .loader{
+    height: 90vh;
+    z-index: 4;
+    position: absolute;
+    background-color: white;
+    width: 100vw;
+  }
