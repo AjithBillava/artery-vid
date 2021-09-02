@@ -17,7 +17,7 @@ export const History = () =>{
             {
                history?.length!==0?
                history?.map((video)=>(
-                <VideoThumbnail key={video._id} userId={userId} videoDetails={video} path="history"/>
+                <VideoThumbnail key={video._id} userId={userId} videoDetails={video}/>
                 
             ))
             
