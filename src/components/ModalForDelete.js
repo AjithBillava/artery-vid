@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import { useData } from "../contexts/DataContext"
 
 export const DeleteModal = ({playListName,playlist_id,show,setShow}) =>{
-    const {dataDispatch} = useData()
+    const {state:{user},removePlaylist} = useData()
     return(
         <div  className="playlist center">
             <div className="modal-contents md-width-card add-to-playlist relative-box">
@@ -11,7 +11,7 @@ export const DeleteModal = ({playListName,playlist_id,show,setShow}) =>{
                 </div>
                 <div className="horizontal justify-center">
                     <button onClick={()=>setShow(!show)} className="btn link-btn pd-0-2">No</button>
-                    <Link to="/playlist-videos" onClick={()=>dataDispatch({type:"REMOVE_PLAYLIST",_id:playlist_id})} className="btn primary-btn pd-0-2">
+                    <Link to="/playlist-videos" onClick={()=>removePlaylist(user._id,playlist_id)} className="btn primary-btn pd-0-2">
                         Yes
                     </Link>
                 </div>

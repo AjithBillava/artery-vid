@@ -8,9 +8,11 @@ import { CreateNewPlaylist } from "./CreateNewPlayList";
 export const AddToPlaylist = ( {show,setShow,showToast,setShowToast} ) =>{
     const [showPlaylist,setShowPlaylist] = useState(false);
 
-    const {state:{library,currVideo},dataDispatch} = useData()
+    const {state:{library,currVideo,user},addVideoToPlaylist,removeVideoFromPlaylist} = useData()
     const playlist=library.playlist;
-  
+    const userId = user._id
+
+    console.log(playlist)
     return(
         
         <div className="playlist center">
@@ -23,22 +25,22 @@ export const AddToPlaylist = ( {show,setShow,showToast,setShowToast} ) =>{
                
                <div className="border-bottom">
                {
-                   playlist.map((item)=>(
+                   playlist?.map((item)=>(
                            <label key={item._id} htmlFor={item._id} className="space-between align-center " >
                                 <input type="checkbox" 
                                 onClick={()=>{
                                     if(!checkItem(item.videos,currVideo._id)){
-                                        dataDispatch({type:"ADD_TO_PLAYLIST",currVid:{...currVideo,selectedPlaylist:true},_id:item._id})
+                                        addVideoToPlaylist(userId,item.name,item._id,currVideo._id)
                                         setShowToast(!showToast)
                                     }
                                     else{
-                                        dataDispatch({type:"REMOVE_FROM_PLAYLIST",currVid:{...currVideo,selectedPlaylist:false},_id:item._id})
+                                        removeVideoFromPlaylist(userId,item._id,currVideo._id)
                                         setShowToast(!showToast)
                                     }}}
                                 _id={item._id}
                                 checked={checkItem(item.videos,currVideo._id)} 
                             ></input>
-                           {item.name}
+                           {item.playListName}
                             </label>
                        
                    ))

@@ -1,9 +1,10 @@
 import { useData } from "../contexts/DataContext"
 import { Link } from "react-router-dom";
-import {ADD_TO_HISTORY} from "../reducers/DataReducer"
+import { VideoThumbnail } from "./VideoThumbnail";
 
 export const History = () =>{
-    const {state:{history},dataDispatch} = useData()
+    const {state:{history,user},addToHistory} = useData()
+    const userId=user?._id
     console.log(history)
     console.log(history)
     return(
@@ -14,21 +15,12 @@ export const History = () =>{
                 <hr/>
             <div className="wrap">
             {
-                history.length!==0?
-               history.map(({_id,name,imageURL,videoURL,duration,details})=>(
-                <Link to={`/${_id}`} className="thumbnail " 
-                onClick={()=>dataDispatch({type:ADD_TO_HISTORY,video:{_id,name,imageURL,videoURL,duration,details}})}
-                key={_id}
-                >
-                    <div className="badge-container vertical-card ">
-                        <img src={imageURL} style={{height:"150px",width:"250px"}} alt={name}/>
-                        <span className="duration-badge">{duration}</span>
-                    </div>
-                    <div className="thumbnail_title">
-                        {name}
-                    </div>
-                </Link>
+               history?.length!==0?
+               history?.map((video)=>(
+                <VideoThumbnail key={video._id} userId={userId} videoDetails={video} path="history"/>
+                
             ))
+            
             :
             (
                 <div className="md-txt center horizontal-card">

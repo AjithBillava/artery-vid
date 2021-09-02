@@ -1,11 +1,12 @@
 import { useData } from "../contexts/DataContext";
-import {ADD_TO_HISTORY} from "../reducers/DataReducer"
 import { Link } from "react-router-dom";
 import { NoItemsInComponent } from "./Library";
+import { VideoThumbnail } from "./VideoThumbnail";
 
 export const SavedVideos = ()=>{
-    const {state:{library},dataDispatch} = useData()
+    const {state:{library,user},addToHistory} = useData()
     const savedVideos=library.saved;
+    const userId=user?._id
     return(
         <div className="main-section">
             
@@ -14,21 +15,9 @@ export const SavedVideos = ()=>{
                 <hr/>
             <div className="wrap">
             {
-                savedVideos.length!==0?
-               savedVideos.map(({_id,name,imageURL,videoURL,duration,details})=>(
-                <Link to={`/${_id}`} className="thumbnail " 
-                onClick={()=>dataDispatch({type:ADD_TO_HISTORY,video:{_id,name,imageURL,videoURL,duration,details}})}
-
-                key={_id}
-                >
-                    <div className="badge-container vertical-card ">
-                        <img src={imageURL} style={{height:"150px",width:"250px"}} alt={name}/>
-                        <span className="duration-badge">{duration}</span>
-                    </div>
-                    <div className="thumbnail_title">
-                        {name}
-                    </div>
-                </Link>
+                savedVideos?.length!==0 ?
+               savedVideos?.map((video)=>(
+                <VideoThumbnail key={video._id} userId={userId} videoDetails={video}/>
                 ))
                 :
                 <NoItemsInComponent action="saved" />

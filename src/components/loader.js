@@ -1,7 +1,7 @@
 
 export const LoaderComponent =()=>{
     return(
-        <div className="horizontal-card center wrap loader">
+        <div className="horizontal-card center wrap container center loader">
             <h1> loading... </h1>
             {/* <Loader
                 type="Oval"

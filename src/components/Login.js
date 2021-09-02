@@ -40,9 +40,7 @@ export const Login = () =>{
         <div className="horizontal-card wrap main-section center">
             {isAuthenticated?
             <div>
-                <button className="remove-btn md-btn btn" onClick={()=>
-                    logoutUser()
-                    }>Logout</button>
+                <button className="remove-btn md-btn btn" onClick={()=>logoutUser()}>Logout</button>
             </div>
             :
             <form className=" card block-card ">

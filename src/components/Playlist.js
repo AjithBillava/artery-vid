@@ -1,15 +1,17 @@
 import { useData } from "../contexts/DataContext"
 import { Link } from "react-router-dom";
-import {ADD_TO_HISTORY} from "../reducers/DataReducer"
 import { useState } from "react";
 import { CreateNewPlaylist } from "./CreateNewPlayList";
+import { VideoThumbnail } from "./VideoThumbnail";
 
 export const PlayList = ({showToast,setShowToast})=> {
     const [showPlaylist,setShowPlaylist] = useState(false);
 
-    const {state:{library},dataDispatch} =useData()
+    const {state:{library,user},addToHistory} =useData()
     const playlist=library.playlist;
+    const userId=user?._id
 
+    console.log(playlist,playlist.length)
     return(
         <div className="main-section">
             
@@ -30,8 +32,8 @@ export const PlayList = ({showToast,setShowToast})=> {
 
             <div className="mg-top-2 " >
             {
-                playlist.length!==0?
-               playlist.map(({playListName,videos,_id:playlistID})=>(
+                playlist?.length!==0 ?
+               playlist?.map(({playListName,videos,_id:playlistID})=>(
                  
                 <div  key={playlistID} >
                     {videos.length>4?
@@ -46,19 +48,8 @@ export const PlayList = ({showToast,setShowToast})=> {
                     }
                         <div className="wrap">
                         {
-                        videos.map(({_id,name,imageURL,videoURL,duration,details})=>(
-                        <Link to={`/${_id}`} className="thumbnail " 
-                        onClick={()=>dataDispatch({type:ADD_TO_HISTORY,video:{_id,name,imageURL,videoURL,duration,details}})}
-                    key={_id}
-                        >
-                            <div className="badge-container vertical-card ">
-                                <img src={imageURL} style={{height:"150px",width:"250px"}} alt={name}/>
-                                <span className="duration-badge">{duration}</span>
-                            </div>
-                            <div className="thumbnail_title">
-                                {name}
-                            </div>
-                        </Link>
+                        videos.map((video)=>(
+                            <VideoThumbnail key={video._id} userId={userId} videoDetails={video}/>
                        ))
                        }
                     </div>

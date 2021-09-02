@@ -85,6 +85,13 @@ a{
 .thumbnail:hover{
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.411);
 }
+.thumbnail-details{
+    display: flex;
+    align-items: center;
+}
+.right{
+    right: 0;
+}
 .thumbnail_title{
     padding: 0.3rem;
     overflow: hidden;
@@ -94,6 +101,14 @@ a{
     -webkit-box-orient: vertical;
     font-weight: 600;
     height: calc( 2rem + 0.6rem );
+    width: 90%;
+}
+.option-icon{
+    padding: 0;
+    margin: 0;
+}
+.option-icon:hover{
+    background-color: yellow;
 }
 .duration-badge{
     position: absolute;

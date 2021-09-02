@@ -1,13 +1,10 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useData } from "../contexts/DataContext";
-// import { VideoDB } from "../Video Lib data/videoData";
-import {ADD_TO_HISTORY} from "../reducers/DataReducer"
-import { useAxios } from "../server/server.request";
-import { LoaderComponent } from "./loader";
+import { VideoThumbnail } from "./VideoThumbnail";
+
 export const Home = ()=>{
-    const {state:{isLoading,videoData},dataDispatch} =useData()
-    // const VideoDB = useAxios()
-    // console.log(VideoDB)
+    const {state:{videoData,user}} =useData()
+    const userId = user?._id
     return(
         <div className="main-section">
             
@@ -16,27 +13,24 @@ export const Home = ()=>{
                 <hr/>
             <div className="wrap" >
             {
-            //    !isLoading?
                ( 
-                   videoData.map(({_id,name,imageURL,videoURL,duration,details})=>(
-                    <Link to={`/${_id}`} className="thumbnail " 
-                    onClick={()=>dataDispatch({type:ADD_TO_HISTORY,video:{_id,name,imageURL,videoURL,duration,details}})}
-                    key={_id}
-                    >
-                        <div className="badge-container vertical-card ">
-                            <img src={imageURL} style={{height:"150px",width:"250px"}} alt={name} />
-                            <span className="duration-badge">{duration}</span>
-                        </div>
-                        <div className="thumbnail_title">
-                            {name}
-                        </div>
-                    </Link>
+                   videoData.map((video)=>(
+                       <VideoThumbnail key={video._id} userId={userId} videoDetails={video}/>
+                    // <Link to={`/${_id}`} className="thumbnail " 
+                    // onClick={()=>addToHistory(userId,_id,{_id,name,imageURL,videoURL,duration,details})}
+                    // // onClick={()=>dataDispatch({type:ADD_TO_HISTORY,video:{_id,name,imageURL,videoURL,duration,details}})}
+                    // key={_id}
+                    // >
+                    //     <div className="badge-container vertical-card ">
+                    //         <img src={imageURL} style={{height:"150px",width:"250px"}} alt={name} />
+                    //         <span className="duration-badge">{duration}</span>
+                    //     </div>
+                    //     <div className="thumbnail_title">
+                    //         {name}
+                    //     </div>
+                    // </Link>
                 ))
                 )
-                // :
-                // (
-                //     <LoaderComponent/>
-                // )
             }
             </div>
         </div>

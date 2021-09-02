@@ -1,12 +1,12 @@
 import { useData } from "../contexts/DataContext"
 import { Link, useParams } from "react-router-dom";
-// import {ADD_TO_HISTORY} from "../reducers/DataReducer"
-import {ADD_TO_HISTORY} from "../reducers/DataReducer"
 import { DeleteModal } from "./ModalForDelete";
 import { useState } from "react";
+import { VideoThumbnail } from "./VideoThumbnail";
 
 export const VideoList = ({videos,name:playListName,playlist_id}) =>{
-    const {dataDispatch} = useData()
+    const {state:{user},addToHistory} = useData()
+    const userId=user?._id
     console.log(videos)
     const [show,setShow] = useState(false)
     return(
@@ -24,20 +24,8 @@ export const VideoList = ({videos,name:playListName,playlist_id}) =>{
 
                 <div className="wrap">
                     {videos.length!==0?
-                        videos.slice(0,4).map(({_id,name,imageURL,videoURL,duration,details})=>(
-                            <Link to={`/${_id}`} className="thumbnail " 
-                    onClick={()=>dataDispatch({type:ADD_TO_HISTORY,video:{_id,name,imageURL,videoURL,duration,details}})}
-
-                            key={_id}
-                            >
-                                <div className="badge-container vertical-card ">
-                                    <img src={imageURL} style={{height:"150px",width:"250px"}} alt={name}/>
-                                    <span className="duration-badge">{duration}</span>
-                                </div>
-                                <div className="thumbnail_title">
-                                    {name}
-                                </div>
-                            </Link>
+                        videos.slice(0,4).map((video)=>(
+                            <VideoThumbnail key={video._id} userId={userId} videoDetails={video}/>
                         ))
                         :
                         <div  className="horizontal-card align-center md-txt">
@@ -58,7 +46,7 @@ export const CurrentPlaylist = () =>{
     const {selected_playlist_ID} = useParams()
     console.log(selected_playlist_ID) 
 
-    const currentPlaylist= playlist.filter(list=>list._id===selected_playlist_ID)
+    const currentPlaylist= playlist?.filter(list=>list._id===selected_playlist_ID)
     console.log(currentPlaylist)
 
     
