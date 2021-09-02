@@ -1,7 +1,3 @@
-import { v4 } from "uuid";
-// import { checkItem } from "../components/VideoDetails";
-
-
 export const ADD_TO_HISTORY="ADD_TO_HISTORY"
 export const ADD_TO_LIKED_LIBRARY="ADD_TO_LIKED_LIBRARY"
 export const REMOVE_FROM_LIBRARY="REMOVE_FROM_LIBRARY"
@@ -10,10 +6,9 @@ export const UNSAVE_VIDEO="UNSAVE_VIDEO"
 
 export const dataReducer =( state, {type,video,_id,playListName,currVid,payload})=>{
 
-    const {history,library}=state;
+    const {library}=state;
     
    
-    // console.log(currVid._id)
     switch(type){
         case "SET_LOADING":
             return {
@@ -124,10 +119,6 @@ export const dataReducer =( state, {type,video,_id,playListName,currVid,payload}
                 },
                 toastMessage:"Video added to playlist"
             }
-        // case "ADD_PLAYLIST":
-        //     return{
-        //         ...state,library:{...library,playlist:library.playlist.concat({_id:v4(),name:playListName,videos:[]})},toastMessage:"Created playlist"
-        //     }
         case "REMOVE_PLAYLIST":
             return{
                 ...state,
@@ -136,23 +127,8 @@ export const dataReducer =( state, {type,video,_id,playListName,currVid,payload}
                     playlist:payload?.playList?.playLists
                 },
                 toastMessage:"Playlist deleted"
-            }    
-        // case "ADD_TO_PLAYLIST":
-        //     // console.log(currVid)
-        //     let index1 = state.library.playlist.findIndex(item=>item._id===_id)
-        //     console.log(index1)
-        //     return {...state,
-        //         library:{
-        //             ...library,playlist:library.playlist.map(
-        //                 (item)=>{
-        //                     if(item._id===_id){
-        //                         return{...item,videos:[...item.videos,currVid]}
-        //                     }
-        //                     return item
-        //                 }
-        //                 )
-        //                 },toastMessage:`Added to ${library.playlist[index1].name}`}
-        case "REMOVE_VIDEO_FROM_PLAYLIST":
+            }  
+            case "REMOVE_VIDEO_FROM_PLAYLIST":
             return{
                 ...state,
                 library:{
