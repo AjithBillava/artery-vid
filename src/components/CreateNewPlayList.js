@@ -16,7 +16,6 @@ export const CreateNewPlaylist = ({setShowPlaylist,showPlaylist,showToast,setSho
             <div className="center">
             <button className="btn sm-btn primary-btn" onClick={()=>{
                 playListName && addPlaylist(userId,playListName)
-                // playListName && dataDispatch({type:"ADD_PLAYLIST",playListName:`${playListName}`})
                 playListName && setShowPlaylist(!showPlaylist)
                 playListName && setShowToast(!showToast)
                 !playListName && setError("please enter playlist name")

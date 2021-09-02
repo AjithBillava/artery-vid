@@ -1,9 +1,8 @@
 import { useData } from "../contexts/DataContext"
-import { Link } from "react-router-dom";
 import { VideoThumbnail } from "./VideoThumbnail";
 
 export const History = () =>{
-    const {state:{history,user},addToHistory} = useData()
+    const {state:{history,user}} = useData()
     const userId=user?._id
     console.log(history)
     console.log(history)

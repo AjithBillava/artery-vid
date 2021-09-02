@@ -1,7 +1,6 @@
 import { useReducer } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useData } from "../contexts/DataContext";
-// import { useLogin } from "../Context/LoginContext"
 
 export const loginReducer  = (state,{type,payload}) =>{
     switch (type){

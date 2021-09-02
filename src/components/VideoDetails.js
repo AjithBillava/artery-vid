@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router";
 import { useData } from "../contexts/DataContext";
-import {ADD_TO_LIKED_LIBRARY,REMOVE_FROM_LIBRARY, SAVE_VIDEO, UNSAVE_VIDEO} from "../reducers/DataReducer"
 import {AddToPlaylist} from "./AddToPlaylist"
 import { checkItem } from "../utils/CheckItem";
 
@@ -12,11 +11,9 @@ export const VideoDetails = ({showToast,setShowToast}) =>{
     const LikedVideos=library.liked;
     const SavedVideos=library.saved;
     const userId= user._id
-    // console.log(currVideo)
     const video=currVideo;
     const {currVideoID} =useParams()
 
-    // console.log(currVideoID,video._id)
     return(
         <div className="main-section"> 
             <div className="container center ">
