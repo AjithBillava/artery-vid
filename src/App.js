@@ -17,6 +17,7 @@ import { Login } from './components/Login';
 import { LoaderComponent } from './components/loader';
 import { Register } from './components/Register';
 import { PrivateRoute } from './components/private route/PrivateRoute';
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const {state:{showSideNav}} = useData()

@@ -1,6 +1,7 @@
 import { createContext } from "react";
 import { dataReducer } from "../reducers/DataReducer";
 import {useReducer,useContext} from "react";
+import { toast } from "react-toastify";
 import axios from "axios";
 const {REACT_APP_BACKEND_URL} = process.env
 
@@ -56,7 +57,13 @@ export const DataProvider = ({children}) =>{
             console.log(videoData)
             dataDispatch({type:"SET_VIDEOS",payload:videoData.videos})
             dataDispatch({type:"SET_LOADING",payload:false})
+            
         } catch (error) {
+            toast.error(error.response.data.message, {
+				style: { backgroundColor: "var(--error-color)", letterSpacing: "0.8px" },
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
             console.log(error.response)
         }
     }
@@ -68,8 +75,17 @@ export const DataProvider = ({children}) =>{
             dataDispatch({type:"SET_USER",payload:data})
             console.log(data)
             dataDispatch({type:"SET_LOADING",payload:false})
-            
+            toast.success(data.message, {
+                style: { backgroundColor: "##15b996" },
+                autoClose: 2000,
+                hideProgressBar: true,
+                    });
         } catch (error) {
+            toast.error(error.response.data.message, {
+				style: { backgroundColor: "var(--error-color)", letterSpacing: "0.8px" },
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
             console.log(error.response)
         }
     }
@@ -79,27 +95,59 @@ export const DataProvider = ({children}) =>{
             console.log(data)
             dataDispatch({type:"LOGIN_USER",payload:data})
             navigate(state?.from?state.from:"/")
-
-        } catch (error) {
+            toast.success("Logged in sucessfully", {
+                style: { backgroundColor: "##15b996" },
+                autoClose: 2000,
+                hideProgressBar: true,
+                    });
+        } catch (error) {toast.error(error.response.data.message, {
+            style: { backgroundColor: "var(--error-color)", letterSpacing: "0.8px" },
+            autoClose: 2000,
+            hideProgressBar: true,
+        });
             console.log(error.response)
         }
     }
     const logoutUser = ()=>{
         try{
           dataDispatch({type:"LOGOUT_USER"}) 
+          toast.success("Logged out sucessfully", {
+            style: { backgroundColor: "##15b996" },
+            autoClose: 2000,
+            hideProgressBar: true,
+                });
         }catch(error){
+            toast.error(error.response.data.message, {
+				style: { backgroundColor: "var(--error-color)", letterSpacing: "0.8px" },
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
           console.error(error.response);
         }
       }
     
     const registerUser =async (firstname,lastname,email,password,state,navigate) =>{
         try {
+            toast.success("Registering...", {
+                style: { backgroundColor: "##15b996" },
+                autoClose: 2000,
+                hideProgressBar: true,
+                    });
             const {data} = await axios.post(`${REACT_APP_BACKEND_URL}/user/register`,{firstname,lastname,email,password})
             
             dataDispatch({type:"REGISTER_USER",payload:data})
             navigate(state?.from?state.from:"/")
-
+            toast.success(data.message, {
+                style: { backgroundColor: "##15b996" },
+                autoClose: 2000,
+                hideProgressBar: true,
+                    });
         } catch (error) {
+            toast.error(error.response.data.message, {
+				style: { backgroundColor: "var(--error-color)", letterSpacing: "0.8px" },
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
             console.log(error.response)
         }
     }
@@ -115,6 +163,11 @@ export const DataProvider = ({children}) =>{
             dataDispatch({type:"SET_LOADING",payload:false})
 
         } catch (error) {
+            toast.error(error.response.data.message, {
+				style: { backgroundColor: "var(--error-color)", letterSpacing: "0.8px" },
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
             console.log(error.response)
         }
     }
@@ -129,6 +182,11 @@ export const DataProvider = ({children}) =>{
             dataDispatch({type:"SET_LOADING",payload:false})
 
         } catch (error) {
+            toast.error(error.response.data.message, {
+				style: { backgroundColor: "var(--error-color)", letterSpacing: "0.8px" },
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
             console.log(error.response)
         }
     }
@@ -141,8 +199,17 @@ export const DataProvider = ({children}) =>{
 
             dataDispatch({type:"CLEAR_HISTORY",payload:data})
             dataDispatch({type:"SET_LOADING",payload:false})
-
+            toast.success("History cleared", {
+                style: { backgroundColor: "##15b996" },
+                autoClose: 2000,
+                hideProgressBar: true,
+                    });
         } catch (error) {
+            toast.error(error.response.data.message, {
+				style: { backgroundColor: "var(--error-color)", letterSpacing: "0.8px" },
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
             console.log(error.response)
         }
     }
@@ -153,8 +220,17 @@ export const DataProvider = ({children}) =>{
             console.log(data)
 
             dataDispatch({type:"ADD_TO_LIKED_VIDEOS",payload:data})
-
+            toast.success(data.message, {
+                style: { backgroundColor: "##15b996" },
+                autoClose: 2000,
+                hideProgressBar: true,
+                    });
         } catch (error) {
+            toast.error(error.response.data.message, {
+				style: { backgroundColor: "var(--error-color)", letterSpacing: "0.8px" },
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
             console.log(error.response)
         }
     }
@@ -165,8 +241,17 @@ export const DataProvider = ({children}) =>{
             console.log(data)
 
             dataDispatch({type:"REMOVE_FROM_LIKED_VIDEOS",payload:data})
-
+            toast.success(data.message, {
+                style: { backgroundColor: "##15b996" },
+                autoClose: 2000,
+                hideProgressBar: true,
+                    });
         } catch (error) {
+            toast.error(error.response.data.message, {
+				style: { backgroundColor: "var(--error-color)", letterSpacing: "0.8px" },
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
             console.log(error.response)
         }
     }
@@ -177,8 +262,17 @@ export const DataProvider = ({children}) =>{
             console.log(data)
 
             dataDispatch({type:"ADD_TO_SAVED_VIDEOS",payload:data})
-
+            toast.success(data.message, {
+                style: { backgroundColor: "##15b996" },
+                autoClose: 2000,
+                hideProgressBar: true,
+                    });
         } catch (error) {
+            toast.error(error.response.data.message, {
+				style: { backgroundColor: "var(--error-color)", letterSpacing: "0.8px" },
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
             console.log(error.response)
         }
     }
@@ -189,8 +283,17 @@ export const DataProvider = ({children}) =>{
             console.log(data)
 
             dataDispatch({type:"REMOVE_FROM_SAVED_VIDEOS",payload:data})
-
+            toast.success(data.message, {
+                style: { backgroundColor: "##15b996" },
+                autoClose: 2000,
+                hideProgressBar: true,
+                    });
         } catch (error) {
+            toast.error(error.response.data.message, {
+				style: { backgroundColor: "var(--error-color)", letterSpacing: "0.8px" },
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
             console.log(error.response)
         }
     }
@@ -199,8 +302,17 @@ export const DataProvider = ({children}) =>{
         try {
             const {data} = await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/playlists`,{playListName},TokenConfig())
             dataDispatch({type:"ADD_PLAYLIST",payload:data})
-            
+            toast.success(data.message, {
+                style: { backgroundColor: "##15b996" },
+                autoClose: 2000,
+                hideProgressBar: true,
+                    });
         } catch (error) {
+            toast.error(error.response.data.message, {
+				style: { backgroundColor: "var(--error-color)", letterSpacing: "0.8px" },
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
             console.log(error)
         }
     }
@@ -208,8 +320,17 @@ export const DataProvider = ({children}) =>{
         try {
             const {data} = await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/playlists/${playListId}`,{playListName,videoId},TokenConfig())
             dataDispatch({type:"ADD_VIDEO_TO_PLAYLIST",payload:data})
-            
+            toast.success(data.message, {
+                style: { backgroundColor: "##15b996" },
+                autoClose: 2000,
+                hideProgressBar: true,
+                    });
         } catch (error) {
+            toast.error(error.response.data.message, {
+				style: { backgroundColor: "var(--error-color)", letterSpacing: "0.8px" },
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
             console.log(error)
         }
     }
@@ -220,8 +341,17 @@ export const DataProvider = ({children}) =>{
             dataDispatch({type:"REMOVE_PLAYLIST",payload:data})
             console.log(data)
             dataDispatch({type:"SET_LOADING",payload:false})
-
+            toast.success(data.message, {
+                style: { backgroundColor: "##15b996" },
+                autoClose: 2000,
+                hideProgressBar: true,
+                    });
         } catch (error) {
+            toast.error(error.response.data.message, {
+				style: { backgroundColor: "var(--error-color)", letterSpacing: "0.8px" },
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
             console.log(error)
         }
     }
@@ -229,8 +359,17 @@ export const DataProvider = ({children}) =>{
         try {
             const {data} = await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/playlists/${playListId}/${videoId}/remove`,{playListId,videoId},TokenConfig())
             dataDispatch({type:"REMOVE_VIDEO_FROM_PLAYLIST",payload:data})
-
+            toast.success(data.message, {
+                style: { backgroundColor: "##15b996" },
+                autoClose: 2000,
+                hideProgressBar: true,
+                    });
         } catch (error) {
+            toast.error(error.response.data.message, {
+				style: { backgroundColor: "var(--error-color)", letterSpacing: "0.8px" },
+				autoClose: 2000,
+				hideProgressBar: true,
+			});
             console.log(error)
         }
     }
