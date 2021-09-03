@@ -4,7 +4,7 @@ import { useState } from "react";
 import { CreateNewPlaylist } from "./CreateNewPlayList";
 import { VideoThumbnail } from "./VideoThumbnail";
 
-export const PlayList = ({showToast,setShowToast})=> {
+export const PlayList = ()=> {
     const [showPlaylist,setShowPlaylist] = useState(false);
 
     const {state:{library,user}} =useData()
@@ -23,7 +23,7 @@ export const PlayList = ({showToast,setShowToast})=> {
                         {showPlaylist &&
                         <div className="new-playlist curve pd-0-2 md-width-card add-to-playlist">
                             <button className="dismiss-btn top-right" onClick={()=>setShowPlaylist(!setShowPlaylist)}>x</button>
-                            <CreateNewPlaylist showToast={showToast} setShowToast={setShowToast} showPlaylist={showPlaylist} setShowPlaylist={setShowPlaylist} />
+                            <CreateNewPlaylist showPlaylist={showPlaylist} setShowPlaylist={setShowPlaylist} />
                         </div>
                         }
                     </div>

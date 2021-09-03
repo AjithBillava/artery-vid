@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useData } from "../contexts/DataContext"
 
-export const CreateNewPlaylist = ({setShowPlaylist,showPlaylist,showToast,setShowToast}) =>{
+export const CreateNewPlaylist = ({setShowPlaylist,showPlaylist }) =>{
     const {state:{user},addPlaylist} = useData()
     const [playListName,setPlayListName] =useState("")
     const [error,setError] = useState("")
@@ -17,7 +17,6 @@ export const CreateNewPlaylist = ({setShowPlaylist,showPlaylist,showToast,setSho
             <button className="btn sm-btn primary-btn" onClick={()=>{
                 playListName && addPlaylist(userId,playListName)
                 playListName && setShowPlaylist(!showPlaylist)
-                playListName && setShowToast(!showToast)
                 !playListName && setError("please enter playlist name")
                 }} >create</button>
             </div>

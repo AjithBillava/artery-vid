@@ -9,16 +9,16 @@ import {LikedVideos} from "./components/LikedVideos"
 import {SavedVideos} from "./components/SavedVideo";
 import { PlayList } from './components/Playlist';
 import { CurrentPlaylist } from './components/CurrentPlaylist';
-import { Toast } from './components/ToastComponent';
-import { useState ,useEffect } from 'react';
+import { toast, ToastContainer } from "react-toastify";
+import { useEffect } from 'react';
 import { useData } from './contexts/DataContext';
 import { AsideNav } from "./components/Aside_Navigation";
 import { Login } from './components/Login';
 import { LoaderComponent } from './components/loader';
+import { Register } from './components/Register';
+import { PrivateRoute } from './components/private route/PrivateRoute';
 
 function App() {
-  const [showToast,setShowToast] = useState(false)
-  // const [showSideNav, setShowSideNav] = useState(true)
   const {state:{showSideNav}} = useData()
   const {loadData,loadUser,state} = useData()
  
@@ -33,33 +33,27 @@ function App() {
 			isMounted = false;
 		};
 	}, []);
-  const {toastMessage} = useData()
-  useEffect(()=>{
-    const interval=setTimeout(()=>{
-      setShowToast(false)
-    },1000)
-    return () => {
-      clearTimeout(interval);
-  }
-  },[showToast])    
-  
+     
+
+  toast.configure()
   return (
     <div className="App">
       <Navigation/>
       <div className="relative-box">
-        {showToast &&  <Toast toastMessage={toastMessage}/>}
+      <ToastContainer/>
         {showSideNav && <AsideNav/>}
         {state.isLoading && <LoaderComponent/>}
         <Routes>
           <Route path="/" element={<Home/>} />
-          <Route path="/:currVideoID" element={<VideoDetails showToast={showToast} setShowToast={setShowToast}/>} />
-          <Route path="/history" element={<History/>} />
-          <Route path="/library" element={<Library/>} />
-          <Route path="/liked-videos" element={<LikedVideos/>} />
-          <Route path="/saved-videos" element={<SavedVideos/>} />
+          <Route path="/:currVideoID" element={<VideoDetails />} />
+          <PrivateRoute path="/history" element={<History/>} />
+          <PrivateRoute path="/library" element={<Library/>} />
+          <PrivateRoute path="/liked-videos" element={<LikedVideos/>} />
+          <PrivateRoute path="/saved-videos" element={<SavedVideos/>} />
           <Route path="/login" element={<Login/>} />
-          <Route path="/playlist-videos" element={<PlayList showToast={showToast} setShowToast={setShowToast}/>} />
-          <Route path="/playlist-videos/:selected_playlist_ID" element={<CurrentPlaylist />} />
+          <Route path="/register" element={<Register/>} />
+          <PrivateRoute path="/playlist-videos" element={<PlayList/>} />
+          <PrivateRoute path="/playlist-videos/:selected_playlist_ID" element={<CurrentPlaylist />} />
         </Routes>
       </div>
     </div>

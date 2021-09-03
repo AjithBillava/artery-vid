@@ -57,6 +57,23 @@ a{
 .full-width{
     width: 100% ;
 }
+.register-link{
+    text-decoration: none;
+    color: blue;
+}
+.register-link:hover{
+    text-decoration: underline;
+    color: blue;
+}
+.avatar {
+    background-color: #f1b78a;
+    padding: .75rem;
+    font-weight: 500;
+    font-size: large;
+}
+.avatar:hover{
+    background-color:#ffd0ad;
+  }
 .grey-box{
     width: 100%;
     /* background-color: rgba(128, 128, 128, 0.596); */
@@ -74,7 +91,7 @@ a{
     height: calc( 100vh - 4.8rem);
     /* max-width: 14%; */
     /* min-width: var(--aiside-nav-min-width); */
-    width:15rem;
+    width:20rem;
     /* margin-bottom: var(--margin-1); */
     padding: 2rem 1rem 2rem 0rem;
     justify-content: center;
@@ -252,6 +269,9 @@ a{
 .mg-top-2{
     margin-top: 2rem;
 }
+.mg-top-6{
+    margin-top: 6rem;
+}
 .remove-btn{
     background-color: rgb(212, 41, 41);
 }
@@ -339,5 +359,8 @@ a{
   }
   .thumbnail{
       max-width: 230px;
+  }
+  .grey{
+      width: 70%;
   }
 }

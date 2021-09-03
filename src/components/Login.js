@@ -38,7 +38,7 @@ export const Login = () =>{
     return(
         <div className="main-section center">
             {isAuthenticated?
-            <div className="container">
+            <div className="mg-top-6">
                 <button className="remove-btn md-btn btn" onClick={()=>logoutUser()}>Logout</button>
             </div>
             :
@@ -70,7 +70,7 @@ export const Login = () =>{
                     </button>
                     <div className="grey-text">
                         Not registered yet?
-                        <Link to="/register"> Register here</Link>
+                        <Link className="register-link" to="/register"> Register here</Link>
                     </div>
                 </div>
                 

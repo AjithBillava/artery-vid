@@ -5,7 +5,7 @@ import { CreateNewPlaylist } from "./CreateNewPlayList";
 
 
 
-export const AddToPlaylist = ( {show,setShow,showToast,setShowToast} ) =>{
+export const AddToPlaylist = ( {show,setShow } ) =>{
     const [showPlaylist,setShowPlaylist] = useState(false);
 
     const {state:{library,currVideo,user},addVideoToPlaylist,removeVideoFromPlaylist} = useData()
@@ -30,12 +30,10 @@ export const AddToPlaylist = ( {show,setShow,showToast,setShowToast} ) =>{
                                 <input type="checkbox" 
                                 onClick={()=>{
                                     if(!checkItem(item.videos,currVideo._id)){
-                                        addVideoToPlaylist(userId,item.name,item._id,currVideo._id)
-                                        setShowToast(!showToast)
+                                        addVideoToPlaylist(userId,item.name,item._id,currVideo._id) 
                                     }
                                     else{
-                                        removeVideoFromPlaylist(userId,item._id,currVideo._id)
-                                        setShowToast(!showToast)
+                                        removeVideoFromPlaylist(userId,item._id,currVideo._id) 
                                     }}}
                                 _id={item._id}
                                 checked={checkItem(item.videos,currVideo._id)} 
@@ -50,7 +48,7 @@ export const AddToPlaylist = ( {show,setShow,showToast,setShowToast} ) =>{
                    <div>+</div>
                    <div>Create new playlist</div>
                </div>}
-               {showPlaylist && <CreateNewPlaylist showToast={showToast} setShowToast={setShowToast} showPlaylist={showPlaylist} setShowPlaylist={setShowPlaylist} />}
+               {showPlaylist && <CreateNewPlaylist showPlaylist={showPlaylist} setShowPlaylist={setShowPlaylist} />}
 
            </div>
         </div>

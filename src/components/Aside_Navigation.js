@@ -40,12 +40,6 @@ export const AsideNav = ( ) =>{
               </svg>
               Playlist videos</NavLink>
 
-
-            {/* <svg className="icon-btn  relative-box" viewBox="0 0 24 24" >
-                <g class="style-scope yt-icon">
-                  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8" class="style-scope yt-icon"></path>
-                </g>
-              </svg> */}
             </div>
           </div>
           <div onClick={()=>toggleSideNav(showSideNav)} className="grey">

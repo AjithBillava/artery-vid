@@ -16,7 +16,7 @@ export const HambergerBtn = () =>{
 }
 
 export const Navigation = () =>{
-  
+    const {state:{user,isAuthenticated}} = useData()
     return( 
         <div>
             <nav className="header align-center">
@@ -26,9 +26,16 @@ export const Navigation = () =>{
                     <Link className="nav-links logo" to="/">Atery-Videos</Link>
                 </div>
                 <div>
-                    <Link className="btn md-btn primary-btn" to = "/login">
-                        Login
-                    </Link>
+                <Link  to="/login">
+                          {isAuthenticated?
+                          <div className="avatar ">
+                            {user?.firstname.charAt(0) + user?.lastname.charAt(0)}
+                          </div> 
+                          : 
+                          <div className="btn md-btn primary-btn">
+                            login
+                          </div>}
+                        </Link>
                 </div>
             </nav>        
         </div>

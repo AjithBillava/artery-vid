@@ -1,7 +1,6 @@
 import { useData } from "../contexts/DataContext"
 import { useParams } from "react-router-dom";
 import { DeleteModal } from "./ModalForDelete";
-import { useState } from "react";
 import { VideoThumbnail } from "./VideoThumbnail";
 
 export const VideoList = ({videos,name:playListName,playlist_id}) =>{
