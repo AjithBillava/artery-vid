@@ -36,13 +36,13 @@ export const Login = () =>{
       });
 
     return(
-        <div className="horizontal-card wrap main-section center">
+        <div className="main-section center">
             {isAuthenticated?
-            <div>
+            <div className="container">
                 <button className="remove-btn md-btn btn" onClick={()=>logoutUser()}>Logout</button>
             </div>
             :
-            <form className=" card block-card ">
+            <form className=" card block-card">
                 <div className="center sub-heading mr1">Login page</div>
                 <div className="vertical-card center">
                     <input className="input curve" type="email" placeholder="Email" required 

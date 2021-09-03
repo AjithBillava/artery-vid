@@ -18,7 +18,8 @@ import { LoaderComponent } from './components/loader';
 
 function App() {
   const [showToast,setShowToast] = useState(false)
-  const [showSideNav, setShowSideNav] = useState(true)
+  // const [showSideNav, setShowSideNav] = useState(true)
+  const {state:{showSideNav}} = useData()
   const {loadData,loadUser,state} = useData()
  
 
@@ -44,21 +45,23 @@ function App() {
   
   return (
     <div className="App">
-      <Navigation setShowSideNav={setShowSideNav} showSideNav={showSideNav} />
-      {showToast &&  <Toast toastMessage={toastMessage}/>}
-      {showSideNav && <AsideNav/>}
-      {state.isLoading && <LoaderComponent/>}
-      <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/:currVideoID" element={<VideoDetails showToast={showToast} setShowToast={setShowToast}/>} />
-        <Route path="/history" element={<History/>} />
-        <Route path="/library" element={<Library/>} />
-        <Route path="/liked-videos" element={<LikedVideos/>} />
-        <Route path="/saved-videos" element={<SavedVideos/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/playlist-videos" element={<PlayList showToast={showToast} setShowToast={setShowToast}/>} />
-        <Route path="/playlist-videos/:selected_playlist_ID" element={<CurrentPlaylist />} />
-      </Routes>
+      <Navigation/>
+      <div className="relative-box">
+        {showToast &&  <Toast toastMessage={toastMessage}/>}
+        {showSideNav && <AsideNav/>}
+        {state.isLoading && <LoaderComponent/>}
+        <Routes>
+          <Route path="/" element={<Home/>} />
+          <Route path="/:currVideoID" element={<VideoDetails showToast={showToast} setShowToast={setShowToast}/>} />
+          <Route path="/history" element={<History/>} />
+          <Route path="/library" element={<Library/>} />
+          <Route path="/liked-videos" element={<LikedVideos/>} />
+          <Route path="/saved-videos" element={<SavedVideos/>} />
+          <Route path="/login" element={<Login/>} />
+          <Route path="/playlist-videos" element={<PlayList showToast={showToast} setShowToast={setShowToast}/>} />
+          <Route path="/playlist-videos/:selected_playlist_ID" element={<CurrentPlaylist />} />
+        </Routes>
+      </div>
     </div>
    
   );

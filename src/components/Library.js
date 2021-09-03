@@ -15,7 +15,7 @@ export const NoItemsInComponent = ({action}) =>{
 
 
 export const Library =() =>{
-    const {state:{library,user }, addToHistory} = useData()
+    const {state:{library,user }} = useData()
     const likedVideos=library.liked;
     const userId=user?._id
     const savedVideos=library.saved;
@@ -33,7 +33,7 @@ export const Library =() =>{
                     <p>Liked videos</p>
                     <Link className="see-all-link" to="/liked-videos"> see all</Link>
                 </div>
-                <div className="wrap">
+                <div className="wrap ">
                 {
                     likedVideos?.slice(0,4).map((video)=>(
                         <VideoThumbnail key={video._id} userId={userId} videoDetails={video}/>

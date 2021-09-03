@@ -24,6 +24,8 @@ export const dataList = {
     toastMessage:"",
     isAuthenticated: false,
     isLoading:false,
+    showSideNav:false,
+    showModalForDelete:false
 }
 
 export const DataContext = createContext();
@@ -120,10 +122,24 @@ export const DataProvider = ({children}) =>{
         try {
             dataDispatch({type:"SET_LOADING",payload:true})
 
-            const { data } = await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/history/remove`,{videoId},TokenConfig())
+            const { data } = await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/history/${videoId}/remove`,{videoId},TokenConfig())
             console.log(data)
 
-            dataDispatch({type:"ADD_TO_HISTORY",payload:{data,video}})
+            dataDispatch({type:"REMOVE_FROM_HISTORY",payload:{data,video}})
+            dataDispatch({type:"SET_LOADING",payload:false})
+
+        } catch (error) {
+            console.log(error.response)
+        }
+    }
+    const clearHistory = async (userId) =>{
+        try {
+            dataDispatch({type:"SET_LOADING",payload:true})
+
+            const { data } = await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/history/remove`,{},TokenConfig())
+            console.log(data)
+
+            dataDispatch({type:"CLEAR_HISTORY",payload:data})
             dataDispatch({type:"SET_LOADING",payload:false})
 
         } catch (error) {
@@ -202,6 +218,7 @@ export const DataProvider = ({children}) =>{
             dataDispatch({type:"SET_LOADING",payload:true})
             const {data} = await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/playlists/${playListId}/remove`,{playListId},TokenConfig())
             dataDispatch({type:"REMOVE_PLAYLIST",payload:data})
+            console.log(data)
             dataDispatch({type:"SET_LOADING",payload:false})
 
         } catch (error) {
@@ -216,6 +233,13 @@ export const DataProvider = ({children}) =>{
         } catch (error) {
             console.log(error)
         }
+    }
+
+    const toggleSideNav = (sideNavStatus) =>{
+        dataDispatch({type:"TOGGLE_SIDE_NAV",payload:sideNavStatus})
+    }
+    const toggleModalForDelete = (modalDeleteStatus) =>{
+        dataDispatch({type:"TOGGLE_MODAL_FOR_DELETE",payload:modalDeleteStatus})
     }
 
     return(
@@ -237,6 +261,9 @@ export const DataProvider = ({children}) =>{
             removeFromSavedVideos,
             removePlaylist,
             removeVideoFromPlaylist,
+            clearHistory,
+            toggleSideNav,
+            toggleModalForDelete,
             dataDispatch
         }}>
         {children}

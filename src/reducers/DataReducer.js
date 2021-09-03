@@ -4,7 +4,7 @@ export const REMOVE_FROM_LIBRARY="REMOVE_FROM_LIBRARY"
 export const SAVE_VIDEO="SAVE_VIDEO"
 export const UNSAVE_VIDEO="UNSAVE_VIDEO"
 
-export const dataReducer =( state, {type,video,_id,playListName,currVid,payload})=>{
+export const dataReducer =( state, {type,payload})=>{
 
     const {library}=state;
     
@@ -124,7 +124,8 @@ export const dataReducer =( state, {type,video,_id,playListName,currVid,payload}
                 ...state,
                 library:{
                     ...library,
-                    playlist:payload?.playList?.playLists
+                    playlist:payload?.playList?.playLists,
+                    // showModalForDelete:false
                 },
                 toastMessage:"Playlist deleted"
             }  
@@ -137,6 +138,21 @@ export const dataReducer =( state, {type,video,_id,playListName,currVid,payload}
                 },
                 toastMessage:"video removed from playlist"
             }
+            case "CLEAR_HISTORY":
+                return{
+                    ...state,
+                    history: payload?.videos?.videos,
+                }
+            case "TOGGLE_SIDE_NAV":
+                return{
+                    ...state,
+                    showSideNav : !payload
+                }
+            case "TOGGLE_MODAL_FOR_DELETE":
+                return{
+                    ...state,
+                    showModalForDelete:!payload
+                }
         default:
             console.log("error")
             return state;

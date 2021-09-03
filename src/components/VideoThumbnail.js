@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { useData } from "../contexts/DataContext"
 
-export const VideoThumbnail = ({userId,videoDetails,path}) =>{
+export const VideoThumbnail = ({userId,videoDetails}) =>{
     const {addToHistory}=useData()
     console.log(userId,videoDetails)
     return (        
@@ -10,7 +10,7 @@ export const VideoThumbnail = ({userId,videoDetails,path}) =>{
         key={videoDetails._id}
         >
             <div className="badge-container vertical-card ">
-                <img src={videoDetails.imageURL} style={{height:"150px",width:"250px"}} alt={videoDetails.name} />
+                <img src={videoDetails.imageURL} className="thumbnail-image" alt={videoDetails.name} />
                 <span className="duration-badge">{videoDetails.duration}</span>
             </div>
             <div className="thumbnail_title">

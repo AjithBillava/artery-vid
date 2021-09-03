@@ -7,10 +7,10 @@ export const Home = ()=>{
     return(
         <div className="main-section">
             
-            <div className="container right-pad">
+            <div className="container right-pad ">
             <h1>Artery-Videos</h1>
                 <hr/>
-            <div className="wrap" >
+            <div className="wrap " >
             {
                ( 
                    videoData.map((video)=>(

@@ -1,10 +1,9 @@
 import { useData } from "../contexts/DataContext";
-import { Link } from "react-router-dom";
 import { NoItemsInComponent } from "./Library";
 import { VideoThumbnail } from "./VideoThumbnail";
 
 export const SavedVideos = ()=>{
-    const {state:{library,user},addToHistory} = useData()
+    const {state:{library,user}} = useData()
     const savedVideos=library.saved;
     const userId=user?._id
     return(

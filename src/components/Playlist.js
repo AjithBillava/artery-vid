@@ -7,11 +7,11 @@ import { VideoThumbnail } from "./VideoThumbnail";
 export const PlayList = ({showToast,setShowToast})=> {
     const [showPlaylist,setShowPlaylist] = useState(false);
 
-    const {state:{library,user},addToHistory} =useData()
+    const {state:{library,user}} =useData()
     const playlist=library.playlist;
     const userId=user?._id
 
-    console.log(playlist,playlist.length)
+    // console.log(playlist,playlist?.length)
     return(
         <div className="main-section">
             

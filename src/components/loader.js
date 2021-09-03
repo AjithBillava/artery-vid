@@ -1,4 +1,3 @@
-
 export const LoaderComponent =()=>{
     return(
         <div className="horizontal-card center wrap container center loader">

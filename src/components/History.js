@@ -1,16 +1,21 @@
 import { useData } from "../contexts/DataContext"
+import { DeleteModal } from "./ModalForDelete";
 import { VideoThumbnail } from "./VideoThumbnail";
 
 export const History = () =>{
-    const {state:{history,user}} = useData()
+    const {state:{history,user,showModalForDelete},toggleModalForDelete} = useData()
     const userId=user?._id
     console.log(history)
     console.log(history)
     return(
         <div className="main-section">
             
-            <div className="container right-pad">
-            <h1>History</h1>
+            <div  className="container right-pad">
+            <div className="space-between">
+                <h1>History</h1>
+                {history.length>0?<p className="clear-history-link" onClick={()=>toggleModalForDelete(showModalForDelete)}>Clear history</p>:""}
+                {showModalForDelete && <DeleteModal path="history"/>}
+            </div>
                 <hr/>
             <div className="wrap">
             {
