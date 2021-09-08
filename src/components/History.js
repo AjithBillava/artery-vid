@@ -5,8 +5,6 @@ import { VideoThumbnail } from "./VideoThumbnail";
 export const History = () =>{
     const {state:{history,user,showModalForDelete},toggleModalForDelete} = useData()
     const userId=user?._id
-    console.log(history)
-    console.log(history)
     return(
         <div className="main-section">
             

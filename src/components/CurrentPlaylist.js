@@ -6,7 +6,6 @@ import { VideoThumbnail } from "./VideoThumbnail";
 export const VideoList = ({videos,name:playListName,playlist_id}) =>{
     const {state:{user,showModalForDelete},toggleModalForDelete} = useData()
     const userId=user?._id
-    console.log(videos)
     // const [show,setShow] = useState(false)
     return(
         <div className="container right-pad ">
@@ -43,11 +42,8 @@ export const CurrentPlaylist = () =>{
     const {state:{library}} = useData()
     const playlist=library.playlist;
     const {selected_playlist_ID} = useParams()
-    console.log(selected_playlist_ID) 
 
     const currentPlaylist= playlist?.filter(list=>list._id===selected_playlist_ID)
-    console.log(currentPlaylist)
-
     
     return(
         <div className="main-section">

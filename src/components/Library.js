@@ -19,7 +19,6 @@ export const Library =() =>{
     const likedVideos=library.liked;
     const userId=user?._id
     const savedVideos=library.saved;
-    console.log(likedVideos,savedVideos)
     return(
         <div className="main-section">
             

@@ -363,4 +363,7 @@ a{
   .grey{
       width: 70%;
   }
+  .add-to-playlist{
+      right: 0;
+  }
 }

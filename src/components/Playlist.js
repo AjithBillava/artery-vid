@@ -11,7 +11,6 @@ export const PlayList = ()=> {
     const playlist=library.playlist;
     const userId=user?._id
 
-    // console.log(playlist,playlist?.length)
     return(
         <div className="main-section">
             
@@ -19,7 +18,7 @@ export const PlayList = ()=> {
                 <div className="horizontal align-center">
                     <h1>Playlist Videos</h1>
                     <button className="btn primary-btn pd-0-2" title="new playlist" onClick={()=>setShowPlaylist(!showPlaylist)} >+</button>
-                    <div>
+                    <div className="relative-box">
                         {showPlaylist &&
                         <div className="new-playlist curve pd-0-2 md-width-card add-to-playlist">
                             <button className="dismiss-btn top-right" onClick={()=>setShowPlaylist(!setShowPlaylist)}>x</button>

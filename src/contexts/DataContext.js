@@ -54,7 +54,7 @@ export const DataProvider = ({children}) =>{
         try {
             dataDispatch({type:"SET_LOADING",payload:true})
             const {data : videoData} = await axios.get(`${REACT_APP_BACKEND_URL}/videos`)
-            console.log(videoData)
+            
             dataDispatch({type:"SET_VIDEOS",payload:videoData.videos})
             dataDispatch({type:"SET_LOADING",payload:false})
             
@@ -73,13 +73,13 @@ export const DataProvider = ({children}) =>{
             const {data} =await axios.get(`${REACT_APP_BACKEND_URL}/user`,TokenConfig())
 
             dataDispatch({type:"SET_USER",payload:data})
-            console.log(data)
+            
             dataDispatch({type:"SET_LOADING",payload:false})
-            toast.success(data.message, {
-                style: { backgroundColor: "##15b996" },
-                autoClose: 2000,
-                hideProgressBar: true,
-                    });
+            // toast.success(data.message, {
+            //     style: { backgroundColor: "##15b996" },
+            //     autoClose: 2000,
+            //     hideProgressBar: true,
+            //         });
         } catch (error) {
             toast.error(error.response.data.message, {
 				style: { backgroundColor: "var(--error-color)", letterSpacing: "0.8px" },
@@ -92,7 +92,7 @@ export const DataProvider = ({children}) =>{
     const loginUser = async(email,password,state,navigate) =>{
         try {
             const {data} =await axios.post(`${REACT_APP_BACKEND_URL}/user/login`,{email,password})
-            console.log(data)
+            
             dataDispatch({type:"LOGIN_USER",payload:data})
             navigate(state?.from?state.from:"/")
             toast.success("Logged in sucessfully", {
@@ -157,7 +157,7 @@ export const DataProvider = ({children}) =>{
             dataDispatch({type:"SET_LOADING",payload:true})
 
             const { data } = await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/history`,{videoId},TokenConfig())
-            console.log(data)
+            
 
             dataDispatch({type:"ADD_TO_HISTORY",payload:{data,video}})
             dataDispatch({type:"SET_LOADING",payload:false})
@@ -176,7 +176,7 @@ export const DataProvider = ({children}) =>{
             dataDispatch({type:"SET_LOADING",payload:true})
 
             const { data } = await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/history/${videoId}/remove`,{videoId},TokenConfig())
-            console.log(data)
+            
 
             dataDispatch({type:"REMOVE_FROM_HISTORY",payload:{data,video}})
             dataDispatch({type:"SET_LOADING",payload:false})
@@ -195,7 +195,7 @@ export const DataProvider = ({children}) =>{
             dataDispatch({type:"SET_LOADING",payload:true})
 
             const { data } = await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/history/remove`,{},TokenConfig())
-            console.log(data)
+            
 
             dataDispatch({type:"CLEAR_HISTORY",payload:data})
             dataDispatch({type:"SET_LOADING",payload:false})
@@ -217,7 +217,7 @@ export const DataProvider = ({children}) =>{
         try {
 
             const { data } = await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/likedVideos`,{videoId},TokenConfig())
-            console.log(data)
+            
 
             dataDispatch({type:"ADD_TO_LIKED_VIDEOS",payload:data})
             toast.success(data.message, {
@@ -238,7 +238,7 @@ export const DataProvider = ({children}) =>{
         try {
 
             const { data } = await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/likedVideos/${videoId}/remove`,{videoId},TokenConfig())
-            console.log(data)
+            
 
             dataDispatch({type:"REMOVE_FROM_LIKED_VIDEOS",payload:data})
             toast.success(data.message, {
@@ -259,7 +259,7 @@ export const DataProvider = ({children}) =>{
         try {
 
             const { data } = await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/savedVideos`,{videoId},TokenConfig())
-            console.log(data)
+            
 
             dataDispatch({type:"ADD_TO_SAVED_VIDEOS",payload:data})
             toast.success(data.message, {
@@ -280,7 +280,7 @@ export const DataProvider = ({children}) =>{
         try {
 
             const { data } = await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/savedVideos/${videoId}/remove`,{videoId},TokenConfig())
-            console.log(data)
+            
 
             dataDispatch({type:"REMOVE_FROM_SAVED_VIDEOS",payload:data})
             toast.success(data.message, {
@@ -331,7 +331,7 @@ export const DataProvider = ({children}) =>{
 				autoClose: 2000,
 				hideProgressBar: true,
 			});
-            console.log(error)
+            
         }
     }
     const removePlaylist =async(userId,playListId)=>{
@@ -339,7 +339,7 @@ export const DataProvider = ({children}) =>{
             dataDispatch({type:"SET_LOADING",payload:true})
             const {data} = await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/playlists/${playListId}/remove`,{playListId},TokenConfig())
             dataDispatch({type:"REMOVE_PLAYLIST",payload:data})
-            console.log(data)
+            
             dataDispatch({type:"SET_LOADING",payload:false})
             toast.success(data.message, {
                 style: { backgroundColor: "##15b996" },

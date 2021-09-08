@@ -3,7 +3,6 @@ import { useData } from "../contexts/DataContext"
 
 export const VideoThumbnail = ({userId,videoDetails}) =>{
     const {addToHistory}=useData()
-    console.log(userId,videoDetails)
     return (        
         <Link to={`/${videoDetails._id}`} className="thumbnail " 
         onClick={()=>addToHistory(userId,videoDetails._id,videoDetails)}

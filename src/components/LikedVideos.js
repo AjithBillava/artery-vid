@@ -5,7 +5,6 @@ import { VideoThumbnail } from "./VideoThumbnail";
 export const LikedVideos = ()=>{
     const {state:{library,user}} = useData()
     const likedVideos=library.liked;
-    console.log(likedVideos)
     const userId=user?._id
     return(
         <div className="main-section">

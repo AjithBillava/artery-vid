@@ -12,7 +12,6 @@ export const AddToPlaylist = ( {show,setShow } ) =>{
     const playlist=library.playlist;
     const userId = user._id
 
-    console.log(playlist)
     return(
         
         <div className="playlist center">
