@@ -29,7 +29,7 @@ export const Navigation = () =>{
                 <Link  to="/login">
                           {isAuthenticated?
                           <div className="avatar ">
-                            {user?.firstname.charAt(0) + user?.lastname.charAt(0)}
+                            {user?.firstname.charAt(0).toUpperCase() + user?.lastname.charAt(0).toUpperCase()}
                           </div> 
                           : 
                           <div className="btn md-btn primary-btn">
