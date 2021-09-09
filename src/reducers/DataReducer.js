@@ -73,6 +73,10 @@ export const dataReducer =( state, {type,payload})=>{
                 history:payload.data.videos?.videos,
                 currVideo:payload.video
             }
+        case "GET_CURRENT_VIDEO":
+            return{
+                ...state, currVideo:payload
+            }
         case "ADD_TO_LIKED_VIDEOS":
             return{
                 ...state,

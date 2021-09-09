@@ -12,12 +12,12 @@ export const dataList = {
         liked:[],
         saved:[],
         playlist:[
-            {
-                _id:"default",
-                playListName:"default",
-                videos:[],
+            // {
+            //     _id:"default",
+            //     playListName:"default",
+            //     videos:[],
                 
-            }
+            // }
         ]
     },
     user:{},
@@ -155,11 +155,14 @@ export const DataProvider = ({children}) =>{
     const addToHistory = async (userId,videoId,video) =>{
         try {
             dataDispatch({type:"SET_LOADING",payload:true})
+            if(userId){
+                const { data } = await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/history`,{videoId},TokenConfig())
+                dataDispatch({type:"ADD_TO_HISTORY",payload:{data,video}})
+            }
+            else{
+                dataDispatch({type:"GET_CURRENT_VIDEO",payload:video})
+            }
 
-            const { data } = await axios.post(`${REACT_APP_BACKEND_URL}/user/${userId}/history`,{videoId},TokenConfig())
-            
-
-            dataDispatch({type:"ADD_TO_HISTORY",payload:{data,video}})
             dataDispatch({type:"SET_LOADING",payload:false})
 
         } catch (error) {
