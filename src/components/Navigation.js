@@ -30,7 +30,7 @@ export const Navigation = () =>{
                 
                 <HambergerBtn/>
                 <div>
-                    <Link className="nav-links logo" to="/">Artery-Videos</Link>
+                    <Link className="nav-links md-txt logo" to="/">Artery-Videos</Link>
                 </div>
                 <div>
                 <Link  to="/login">
