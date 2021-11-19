@@ -129,13 +129,26 @@ a{
     max-width: 300px;
     flex-grow: 1;
     flex-shrink: 5;
+    border-radius: 10px;
     border: 1px solid #dfd7d7;
 }
 .clear-history-link{
-    color: grey;
+    color: rgb(104, 99, 99);
     text-decoration: underline;
     font-size: 1.2rem;
     cursor: pointer;
+    padding: 0.2rem 0.5rem ;
+    border-radius: 0.2rem;
+    transition-property: all;
+    transition: ease-in-out;
+    transition-duration: 0.1s;
+}
+.clear-history-link:hover{
+    background-color: rgba(128, 128, 128, 0.61);
+    color:black;
+    transition-property: all;
+    transition: ease-in-out;
+    transition-duration: 0.1s;
 }
 .space-between{
     display: flex;
@@ -154,19 +167,22 @@ a{
     right: 0;
 }
 .thumbnail_title{
-    padding: 0.3rem;
+    padding: .3rem;
     overflow: hidden;
     max-width: 250px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     font-weight: 600;
-    height: calc( 2rem + 0.6rem );
+    height: 2.6rem;
     width: 90%;
+    text-overflow: ellipsis;
+    word-break: break-all
 }
 .thumbnail-image{
     height: 150px;
     width: -webkit-fill-available;
+    border-radius: 5px;
     /* width: 200px; */
     /* height: 200px;
     width: 200px; */
@@ -228,7 +244,17 @@ a{
     align-items: center;
     justify-content: center;
 }
-
+.spaced-list-item{
+    transition-property: all;
+    transition: ease-in-out;
+    transition-duration: 0.1s;
+}
+.spaced-list-item:hover{
+    background-color: rgb(56 56 56);
+    transition-property: all;
+    transition: ease-in-out;
+    transition-duration: 0.1s;
+}
 .sub-heading {
     display: flex;
     flex-wrap: wrap;
@@ -237,10 +263,10 @@ a{
     font-weight: 600;
 }
 .playlist{
-    position: absolute;
+    position: fixed;
     background-color: rgba(0, 0, 0, 0.507);
     width: 100%;
-    height: 90.5vh;
+    height: 100vh;
     min-height: -webkit-fill-available;
     z-index: 4;
     top: 0;
@@ -309,6 +335,7 @@ a{
     margin-top: 1rem;
     flex-wrap: wrap;
 }
+
 .new-playlist{
     z-index: 5;
     position: absolute;
