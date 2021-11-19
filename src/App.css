@@ -272,6 +272,17 @@ a{
     top: 0;
     left: 0;
 }
+.playlist-items{
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
+    align-items: center;
+}
+.nm-txt{
+    font-size: 1.2rem;
+}
+.mt-sm{
+    margin-top: 0.4rem;
+}
 .close-btn{
     /* margin-left: 1rem; */
     position: relative;

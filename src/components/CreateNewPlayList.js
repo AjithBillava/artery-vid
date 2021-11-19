@@ -9,9 +9,9 @@ export const CreateNewPlaylist = ({setShowPlaylist,showPlaylist }) =>{
     const userId=user?._id
     return(
         <div className="create-playlist ">
-            <label className="sm-txt">Name</label>
-            <input  onChange={(e)=>setPlayListName(e.target.value)} placeholder="Enter Playlist name"></input>
-            <label className="sm-txt error-color">{error}</label>
+            <label>Name</label>
+            <input className="mt-sm" onChange={(e)=>setPlayListName(e.target.value)} placeholder="Enter Playlist name"></input>
+            <label className=" error-color">{error}</label>
 
             <div className="center">
             <button className="btn sm-btn primary-btn" onClick={()=>{

@@ -15,9 +15,9 @@ export const AddToPlaylist = ( {show,setShow } ) =>{
     return(
         
         <div className="playlist center">
-           <div className="modal-contents md-width-card add-to-playlist relative-box" >
+           <div className="modal-contents lg-width-card add-to-playlist relative-box" >
            <button className="dismiss-btn top-right" onClick={()=>setShow(!show)}>x</button>
-               <div className="space-between border-bottom relative-box">
+               <div className="space-between border-bottom md-txt relative-box">
                    Add to...
                   
                </div>
@@ -25,7 +25,7 @@ export const AddToPlaylist = ( {show,setShow } ) =>{
                <div className="border-bottom">
                {
                    playlist?.map((item)=>(
-                           <label key={item._id} htmlFor={item._id} className="space-between align-center " >
+                           <label key={item._id} htmlFor={item._id} className="space-between playlist-items align-center " >
                                 <input type="checkbox" 
                                 onClick={()=>{
                                     if(!checkItem(item.videos,currVideo._id)){
@@ -43,9 +43,9 @@ export const AddToPlaylist = ( {show,setShow } ) =>{
                    ))
                }
                </div>
-               {!showPlaylist && <div onClick={()=>setShowPlaylist(!showPlaylist)} style={{cursor:"pointer"}} className="space-between">
+               {!showPlaylist && <div onClick={()=>setShowPlaylist(!showPlaylist)} style={{cursor:"pointer"}} className="space-between md-txt">
                    <div>+</div>
-                   <div>Create new playlist</div>
+                   <div >Create new playlist</div>
                </div>}
                {showPlaylist && <CreateNewPlaylist showPlaylist={showPlaylist} setShowPlaylist={setShowPlaylist} />}
 
