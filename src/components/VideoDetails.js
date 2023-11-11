@@ -1,30 +1,27 @@
 import { useState } from "react";
-import { useData } from "../contexts/DataDispatch";
-// import { useParams } from "react-router"
-// import { VideoDB } from "../Video Lib data/videoData";
-import {ADD_TO_LIKED_LIBRARY,REMOVE_FROM_LIBRARY, SAVE_VIDEO, UNSAVE_VIDEO} from "../reducers/DataReducer"
+import { useParams } from "react-router";
+import { useData } from "../contexts/DataContext";
 import {AddToPlaylist} from "./AddToPlaylist"
-
-export const checkItem = (array, id) => {
-    return array.find((item) => item.id === id);
-  };
+import { checkItem } from "../utils/CheckItem";
 
 export const VideoDetails = () =>{
-    // const {videoID} = useParams();
     const [show,setShow] = useState(false)
 
-    const {dataDispatch,currVideo,library} =useData()
+    const {state:{currVideo,library,user},addToLikedVideos,removeFromLikedVideos,addToSavedVideos,removeFromSavedVideos} =useData()
     const LikedVideos=library.liked;
     const SavedVideos=library.saved;
+    const userId= user._id
     const video=currVideo;
-    // console.log(video)
+    const {currVideoID} =useParams()
+
     return(
-        <div className="main-layout "> 
+        <div className="main-section"> 
             <div className="container center ">
+                {
+                     currVideoID===video._id?
                 <div className="section ">
                     <div >
                     <iframe width="100%" height="335" src={video.videoURL} 
-                    // onClick={()=>dataDispatch({type:"ADD_TO_HISTORY",video:video})}
                     title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
 
@@ -36,9 +33,18 @@ export const VideoDetails = () =>{
                     <i className="icon-btn btn"
                     title="like"
                     style={{
-                        fill: `${checkItem(LikedVideos,video.id) ? "var(--primary-bg)" : "grey"}`
+                        fill: `${checkItem(LikedVideos,video._id) ? "var(--primary-bg)" : "grey"}`
                       }}
-                    onClick={()=>{checkItem(LikedVideos,video.id)? dataDispatch({type:REMOVE_FROM_LIBRARY,id:video.id}): dataDispatch({type:ADD_TO_LIKED_LIBRARY,video:video})}}
+                    onClick={
+                        ()=>{
+                            if(checkItem(LikedVideos,video._id)){ 
+                                removeFromLikedVideos(userId,video._id) 
+                            }
+                            else{
+                                addToLikedVideos(userId,video._id) 
+
+                            }
+                        }}
                     >
                         <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" >
                             <g class="style-scope yt-icon">
@@ -49,11 +55,17 @@ export const VideoDetails = () =>{
                         </svg>
                     </i>
                     <i className="icon-btn btn"
-                    title="like"
+                    title="save"
                     style={{
-                        fill: `${checkItem(SavedVideos,video.id) ? "var(--primary-bg)" : "grey"}`
+                        fill: `${checkItem(SavedVideos,video._id) ? "var(--primary-bg)" : "grey"}`
                       }}
-                    onClick={()=>{checkItem(SavedVideos,video.id)? dataDispatch({type:UNSAVE_VIDEO,id:video.id}): dataDispatch({type:SAVE_VIDEO,video:video})}}>
+                    onClick={()=>{
+                        if(checkItem(SavedVideos,video._id)){ 
+                            removeFromSavedVideos(userId,video._id) 
+                        } 
+                        else {
+                            addToSavedVideos(userId,video._id) 
+                        }}}>
                         <svg aria-label="Remove" class="_8-yf5 " height="24" viewBox="0 0 48 48" width="24"><path d="M43.5 48c-.4 0-.8-.2-1.1-.4L24 28.9 5.6 47.6c-.4.4-1.1.6-1.6.3-.6-.2-1-.8-1-1.4v-45C3 .7 3.7 0 4.5 0h39c.8 0 1.5.7 1.5 1.5v45c0 .6-.4 1.2-.9 1.4-.2.1-.4.1-.6.1z"></path></svg>
                     </i>
 
@@ -73,7 +85,12 @@ export const VideoDetails = () =>{
                     </div>
 
                 </div>
-               
+                :
+                <div>
+                    broken link
+                </div>
+
+               } 
                 
             </div>
              {show&&<AddToPlaylist show={show} setShow={setShow}  />}

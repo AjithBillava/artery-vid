@@ -1,68 +1,72 @@
-import { useData } from "../contexts/DataDispatch"
+import { useData } from "../contexts/DataContext";
 import { Link } from "react-router-dom";
+import { VideoThumbnail } from "./VideoThumbnail";
+
+export const NoItemsInComponent = ({action}) =>{
+    return(
+        <div className="horizontal-card align-center full-width md-txt border-bottom">
+            <div>
+                You have not {action} any video
+            </div>
+            <hr/>
+        </div>
+    )
+}
 
 
 export const Library =() =>{
-    const {library} = useData()
+    const {state:{library,user }} = useData()
     const likedVideos=library.liked;
+    const userId=user?._id
     const savedVideos=library.saved;
-
     return(
-        <div className="main-layout">
+        <div className="main-section">
             
             <div className="container right-pad">
             <h1>Your Library</h1>
                 <hr/>
-               <div >
+               {
+               likedVideos?.length!==0?(<div >
               
-                <div className="space-between align-center">
+                <div className="md-txt space-between align-center">
                     <p>Liked videos</p>
-                    <Link className="md-txt" to="/liked-videos"> see all</Link>
+                    <Link className="see-all-link" to="/liked-videos"> see all</Link>
                 </div>
-                <div className="wrap">
+                <div className="wrap ">
                 {
-                    likedVideos.slice(0,2).map(({id,name,imageURL,videoURL,duration,details})=>(
-                    <Link to={`/${id}`} className="thumbnail " 
-                    key={id}
-                    >
-                        <div className="badge-container vertical-card ">
-                            <img src={imageURL} style={{height:"150px",width:"250px"}} alt={name}/>
-                            <span className="duration-badge">{duration}</span>
-                        </div>
-                        <div className="thumbnail_title">
-                            {name}
-                        </div>
-                    </Link>
+                    likedVideos?.slice(0,4).map((video)=>(
+                        <VideoThumbnail key={video._id} userId={userId} videoDetails={video}/>
                     ))
                 }
                 </div>
                 <hr/>
 
+               </div>)
+               :(
+                   <NoItemsInComponent action="liked"/>
+               )
+               }
+
+               {savedVideos?.length!==0?
+               (<div >
+                <div className="md-txt space-between align-center">
+                        <p>Saved videos</p>
+                        <Link className="see-all-link" to="/saved-videos"> see all</Link>
+
+                    </div>
+                    <div className="wrap">
+                    {
+                        savedVideos?.slice(0,4).map((video)=>(
+                            <VideoThumbnail key={video._id} userId={userId} videoDetails={video}/>
+                        ))
+                    }
+                    </div>
                </div>
-               <div >
-               
-                <div className="space-between align-center">
-                    <p>Saved videos</p>
-                    <Link className="md-txt" to="/saved-videos"> see all</Link>
-                </div>
-                <div className="wrap">
-                {
-                    savedVideos.slice(0,2).map(({id,name,imageURL,videoURL,duration,details})=>(
-                    <Link to={`/${id}`} className="thumbnail " 
-                    key={id}
-                    >
-                        <div className="badge-container vertical-card ">
-                            <img src={imageURL} style={{height:"150px",width:"250px"}} alt={name}/>
-                            <span className="duration-badge">{duration}</span>
-                        </div>
-                        <div className="thumbnail_title">
-                            {name}
-                        </div>
-                    </Link>
-                    ))
-                }
-                </div>
-               </div>
+               )
+                :(
+                    <NoItemsInComponent action="saved"/>
+                )
+               }
             </div>
         </div>
     )

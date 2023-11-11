@@ -1,53 +1,64 @@
-import { useData } from "../contexts/DataDispatch"
+import { useData } from "../contexts/DataContext"
 import { Link } from "react-router-dom";
-import {ADD_TO_HISTORY} from "../reducers/DataReducer"
-
-export const checkItem = (arr,id)=>{
-    return arr.find(item => item.id===id)
-}
+import { useState } from "react";
+import { CreateNewPlaylist } from "./CreateNewPlayList";
+import { VideoThumbnail } from "./VideoThumbnail";
 
 export const PlayList = ()=> {
+    const [showPlaylist,setShowPlaylist] = useState(false);
 
-    const {library,dataDispatch} =useData()
+    const {state:{library,user}} =useData()
     const playlist=library.playlist;
-    // const playlistVideos=library.playlist;
+    const userId=user?._id
 
     return(
-        <div className="main-layout">
+        <div className="main-section">
             
             <div className="container right-pad">
-            <h1>Playlist Videos</h1>
+                <div className="horizontal align-center">
+                    <h1>Playlist Videos</h1>
+                    <button className="btn primary-btn pd-0-2" title="new playlist" onClick={()=>setShowPlaylist(!showPlaylist)} >+</button>
+                    <div className="relative-box">
+                        {showPlaylist &&
+                        <div className="new-playlist curve pd-0-2 md-width-card add-to-playlist">
+                            <button className="dismiss-btn top-right" onClick={()=>setShowPlaylist(!setShowPlaylist)}>x</button>
+                            <CreateNewPlaylist showPlaylist={showPlaylist} setShowPlaylist={setShowPlaylist} />
+                        </div>
+                        }
+                    </div>
+                </div>
                 <hr/>
-            <div >
+
+            <div className="mg-top-2 " >
             {
-               playlist.map(({id,name,videos})=>(
-                // <h2>{name}</h2>
+                playlist?.length!==0 ?
+               playlist?.map(({playListName,videos,_id:playlistID})=>(
                  
-                <div >
-                 <h2>{name}</h2>
-                    
-                    {/* if(checkItem(videos,id)){ */}
+                <div  key={playlistID} >
+                    {videos.length>4?
+                    <div className="md-txt space-between align-center">
+                        <p>{playListName}</p>
+                        <Link className="see-all-link" to={`/playlist-videos/${playlistID}`}> see all</Link>
+                    </div>
+                    :
+                    <div className="md-txt space-between align-center">
+                        <Link className="link" to={`/playlist-videos/${playlistID}`}>{playListName}</Link>
+                    </div>
+                    }
                         <div className="wrap">
                         {
-                        videos.map(({id,name,imageURL,videoURL,duration,details})=>(
-                        <Link to={`/playlist-videos/${id}`} className="thumbnail " 
-                        onClick={()=>dataDispatch({type:ADD_TO_HISTORY,video:{id,name,imageURL,videoURL,duration,details}})}
-                    key={id}
-                        >
-                            <div className="badge-container vertical-card ">
-                                <img src={imageURL} style={{height:"150px",width:"250px"}} alt={name}/>
-                                <span className="duration-badge">{duration}</span>
-                            </div>
-                            <div className="thumbnail_title">
-                                {name}
-                            </div>
-                        </Link>
+                        videos.map((video)=>(
+                            <VideoThumbnail key={video._id} userId={userId} videoDetails={video}/>
                        ))
                        }
                     </div>
-                    {/* } */}
                 </div>
-            ))
+            )):
+            (
+                <div className="md-txt">
+                    There are no playlist
+                </div>
+            )
             }
             </div>
             </div>

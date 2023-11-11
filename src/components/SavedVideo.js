@@ -1,30 +1,25 @@
-import { useData } from "../contexts/DataDispatch"
-import { Link } from "react-router-dom";
+import { useData } from "../contexts/DataContext";
+import { NoItemsInComponent } from "./Library";
+import { VideoThumbnail } from "./VideoThumbnail";
 
 export const SavedVideos = ()=>{
-    const {library} = useData()
+    const {state:{library,user}} = useData()
     const savedVideos=library.saved;
+    const userId=user?._id
     return(
-        <div className="main-layout">
+        <div className="main-section">
             
             <div className="container right-pad">
             <h1>Saved Videos</h1>
                 <hr/>
             <div className="wrap">
             {
-               savedVideos.map(({id,name,imageURL,videoURL,duration,details})=>(
-                <Link to={`/${id}`} className="thumbnail " 
-                key={id}
-                >
-                    <div className="badge-container vertical-card ">
-                        <img src={imageURL} style={{height:"150px",width:"250px"}} alt={name}/>
-                        <span className="duration-badge">{duration}</span>
-                    </div>
-                    <div className="thumbnail_title">
-                        {name}
-                    </div>
-                </Link>
-            ))
+                savedVideos?.length!==0 ?
+               savedVideos?.map((video)=>(
+                <VideoThumbnail key={video._id} userId={userId} videoDetails={video}/>
+                ))
+                :
+                <NoItemsInComponent action="saved" />
             }
             </div>
             </div>

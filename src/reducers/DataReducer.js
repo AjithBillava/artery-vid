@@ -1,106 +1,164 @@
-import { v4 } from "uuid";
-// import { checkItem } from "../components/VideoDetails";
-
-
 export const ADD_TO_HISTORY="ADD_TO_HISTORY"
 export const ADD_TO_LIKED_LIBRARY="ADD_TO_LIKED_LIBRARY"
 export const REMOVE_FROM_LIBRARY="REMOVE_FROM_LIBRARY"
 export const SAVE_VIDEO="SAVE_VIDEO"
 export const UNSAVE_VIDEO="UNSAVE_VIDEO"
 
-export const DataReducer =( state, {type,video,id,playListName,currVid})=>{
+export const dataReducer =( state, {type,payload})=>{
 
-    const {history,library}=state;
-    // console.log(history,library)
-    // console.log(video)
-    // const playList = Object.keys(state.library.playList)
-
-    // const idd=video.id;
-    // console.log(idd)
-    console.log(state.library.playlist.videos)
-    // console.log(playListName)
+    const {library}=state;
+    
+   
     switch(type){
+        case "SET_LOADING":
+            return {
+                ...state,isLoading:payload
+            }
+        case "SET_VIDEOS":
+            return{
+                ...state,videoData:payload
+            }
+        case "SET_USER":
+            return{
+                ...state,
+                user:  payload.user===undefined?{}:payload.user,
+                isAuthenticated:true,
+                history:   payload.user?.history[0]?.videos===undefined?[]:payload.user?.history[0].videos,
+                library:{...library,
+                    liked:   payload.user?.likedVideos[0]?.videos===undefined?[]:payload.user?.likedVideos[0].videos,
+                    saved:   payload.user?.savedVideos[0]?.videos===undefined?[]:payload.user?.savedVideos[0].videos,
+                    playlist:   payload.user?.playLists[0]?.playLists===undefined?[]:payload.user?.playLists[0]?.playLists
+                }
+            }
+        case "LOGIN_USER":
+            localStorage.setItem("token",payload.token)
+            localStorage.setItem("isAuthenticated",true)
+            return{
+                ...state,
+                user:  payload.user===undefined?{}:payload.user,
+                isAuthenticated:true,
+                history:   payload.user?.history[0]?.videos===undefined?[]:payload.user?.history[0].videos,
+                library:{...library,
+                    liked:   payload.user?.likedVideos[0]?.videos===undefined?[]:payload.user?.likedVideos[0].videos,
+                    saved:   payload.user?.savedVideos[0]?.videos===undefined?[]:payload.user?.savedVideos[0].videos,
+                    playlist:   payload.user?.playLists[0]?.playLists===undefined?[]:payload.user?.playLists[0]?.playLists
+                }
+            }
+
+        case "LOGOUT_USER":
+            localStorage.removeItem("token")
+            localStorage.removeItem("isAuthenticated")
+            return{
+                ...state,
+                user:{},
+                isAuthenticated:false,
+                history:[],
+                library:{...library,
+                    liked:[],
+                    saved:[],
+                    playlist:[]
+                }
+            }   
+        case "REGISTER_USER":
+            localStorage.setItem("token",payload.token)
+            localStorage.setItem("isAuthenticated",true)
+            return{
+                ...state,
+                isAuthenticated:true,
+                user:payload.savedUser
+            }
         case ADD_TO_HISTORY:
             return{
-                ...state,history:history.concat(video),
-                currVideo:video
+                ...state,
+                history:payload.data.videos?.videos,
+                currVideo:payload.video
             }
-        case ADD_TO_LIKED_LIBRARY:
+        case "GET_CURRENT_VIDEO":
             return{
-                ...state,library:{...library ,liked:library.liked.concat(video)}
+                ...state, currVideo:payload
             }
-        case REMOVE_FROM_LIBRARY:
+        case "ADD_TO_LIKED_VIDEOS":
             return{
-                ...state,library:{...library ,liked:library.liked.filter((item)=>item.id!==id)}
+                ...state,
+                library:{...library ,
+                    liked:payload?.videos?.videos},
+                    toastMessage:"Added to liked videos"
             }
-        case SAVE_VIDEO:
+        case "REMOVE_FROM_LIKED_VIDEOS":
             return{
-                ...state,library:{...library ,saved:library.saved.concat(video)}
+                ...state,
+                library:{...library,
+                    liked:payload?.videos?.videos},
+                    toastMessage:"Removed from liked videos"
             }
-        case UNSAVE_VIDEO:
+        case "ADD_TO_SAVED_VIDEOS":
             return{
-                ...state,library:{...library ,saved:library.saved.filter((item)=>item.id!==id)}
+                ...state,
+                library:{...library ,
+                    saved:payload?.videos?.videos},
+                    toastMessage:"Added to saved videos"
+            }
+        case "REMOVE_FROM_SAVED_VIDEOS":
+            return{
+                ...state,
+                library:{...library,
+                    saved:payload?.videos?.videos},
+                    toastMessage:"Removed from saved videos"
             }
         case "ADD_PLAYLIST":
             return{
-                ...state,library:{...library,playlist:library.playlist.concat({id:v4(),name:playListName,videos:[]})}
+                ...state,
+                library:{
+                    ...library,
+                    playlist:payload?.playList?.playLists
+                },
+                toastMessage:"Created playlist"
             }
-        case "ADD_TO_PLAYLIST":
-            // console.log(currVid)
-            return {...state,
+        case "ADD_VIDEO_TO_PLAYLIST":
+            return{
+                ...state,
                 library:{
-                    ...library,playlist:library.playlist.map(
-                        (item)=>{
-                            if(item.id===id){
-                                return{...item,videos:[...item.videos,currVid]}
-                            }
-                            return item
-                        }
-                        )
-                        }}
-        case "REMOVE_FROM_PLAYLIST":
-            return {...state,
+                    ...library,
+                    playlist:payload?.playList?.playLists
+                },
+                toastMessage:"Video added to playlist"
+            }
+        case "REMOVE_PLAYLIST":
+            return{
+                ...state,
                 library:{
-                    ...library,playlist:library.playlist.map(
-                        (item)=>{
-                            if(item.id===id){
-                                return {...item,videos:item.videos.filter(vid=>vid.id!==currVid.id)}
-                            }
-                            return item;
-                        })
-                
-                }}
-        // case "CURRENT_VID":
-        //     return{
-        //         ...state,currVideo:video
-        //     }
+                    ...library,
+                    playlist:payload?.playList?.playLists,
+                    // showModalForDelete:false
+                },
+                toastMessage:"Playlist deleted"
+            }  
+            case "REMOVE_VIDEO_FROM_PLAYLIST":
+            return{
+                ...state,
+                library:{
+                    ...library,
+                    playlist:payload?.playList?.playLists
+                },
+                toastMessage:"video removed from playlist"
+            }
+            case "CLEAR_HISTORY":
+                return{
+                    ...state,
+                    history: payload?.videos?.videos,
+                }
+            case "TOGGLE_SIDE_NAV":
+                return{
+                    ...state,
+                    showSideNav : !payload
+                }
+            case "TOGGLE_MODAL_FOR_DELETE":
+                return{
+                    ...state,
+                    showModalForDelete:!payload
+                }
         default:
             console.log("error")
             return state;
     }
 }
-
-// (
-//     {...item,videos:[...item.videos,currVid]}
-//     )
-// console.log(currVid)
-//             return {...state,library:{...library,playlist:library.playlist.map((item)=>({...item,videos:item.videos.concat(currVid)}))}}
-
-
-// return{
-//     ...state,library:{...library,
-//         playlist:library.playlist.map((item)=>
-//         (
-//             item.id===id && !checkItem(item.videos,currVid.id) ?
-//                 {...item,videos:item.videos.concat({...currVid,selectPlaylist:!currVid.selectPlaylist})}:
-//                 {...item,videos:[item.videos.filter(vid=>vid.id===id),{selectPlaylist:!currVid.selectPlaylist}]}
-//         )) }
-// }
-
-
-// return {...state,library:{...library,
-//     playlist:library.playlist.map((item)=>(
-//         {...item,videos:item.videos.filter(vid=>vid.id!==id).map(vid=>({...vid,selectPlaylist:!currVid.selectPlaylist}))}
-//         ))
-    
-//     }}
